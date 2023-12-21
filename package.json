@@ -1,0 +1,29 @@
+{
+  "name": "admin",
+  "version": "1.0.0",
+  "description": "Página administrativa comfisa",
+  "main": "app.js",
+  "author": "Jorge Portocarrrero",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "express-handlebars": "^7.1.2",
+    "express-mysql-session": "2.1.8",
+    "express-session": "^1.17.3",
+    "morgan": "^1.10.0",
+    "mysql": "^2.18.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "path": "^0.12.7",
+    "timeago": "^1.6.7",
+    "timeago.js": "^4.0.2"
+  },
+  "repository": "https://github.com/proyectos-developer/admin-comfisa"
+}
