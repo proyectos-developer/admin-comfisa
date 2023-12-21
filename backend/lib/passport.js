@@ -10,7 +10,7 @@ passport.use('local.signin', new LocalStrategy ({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, correo, password, done) => {
-    const rows = await pool.query('SELECT * FROM users WHERE correo = ?', [correo])
+    const rows = await pool.query('SELECT * FROM users WHERE correo = ? || nro_telefono = ?', [correo, correo])
     const session_id = await pool.query ('SELECT * FROM sessions')
     if (rows.length > 0){
         const usuario = rows [0]
@@ -31,13 +31,14 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, correo, password, done) => {
-    const { usuario, telefono } = req.body
+    const { usuario, nro_telefono } = req.body
     const newUser = {
         correo,
         password,
-        usuario
+        usuario,
+        nro_telefono
     }
-    const rows = await pool.query('SELECT * FROM users WHERE correo = ?', [correo])
+    const rows = await pool.query('SELECT * FROM users WHERE correo = ? || nro_telefono = ?', [correo, nro_telefono])
     if (rows.length > 0) {
         done(null, false, { info: 'El correo ya se encuentra registrado' })
     } else {
