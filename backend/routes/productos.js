@@ -5,19 +5,19 @@ const pool = require('../database')
 const { isLoggedIn } = require('../lib/auth')
 
 router.post ('/api/producto', async (req, res) => {
-    const {id_proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
+    const {id_proveedor, proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
         caracteristica_cuatro, caracteristica_cinco, foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco,
         cantidad, mostrar} = req.body
 
     try {
-        const newProducto = {id_proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
+        const newProducto = {id_proveedor, proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
             caracteristica_cuatro, caracteristica_cinco, foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco,
             cantidad, mostrar}
         const new_producto = await pool.query ('INSERT INTO productos_proveedor set ?', [newProducto])
         const productos = await pool.query ('SELECT * FROM productos_proveedor WHERE id = ?', [new_producto.insertId])
 
         return res.json ({
-            productos: productos[0],
+            producto: productos[0],
             success: true
         })
     } catch (error) {
@@ -29,20 +29,20 @@ router.post ('/api/producto', async (req, res) => {
 })
 
 router.post ('/api/producto/:id_producto', async (req, res) => {
-    const {id_proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
+    const {id_proveedor, proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
             caracteristica_cuatro, caracteristica_cinco, foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco,
             cantidad, mostrar} = req.body
     const {id_producto} = req.params
 
     try {
-        const updateProducto = {id_proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
+        const updateProducto = {id_proveedor, proveedor, producto, descripcion, caracteristica_uno, caracteristica_dos, caracteristica_tres,
             caracteristica_cuatro, caracteristica_cinco, foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco,
             cantidad, mostrar}
         await pool.query ('UPDATE productos_proveedor set ?  WHERE id = ?', [updateProducto, id_producto])
         const productos = await pool.query ('SELECT * FROM productos_proveedor WHERE id = ?', [id_producto])
 
         return res.json ({
-            modelo: productos[0],
+            producto: productos[0],
             success: true
         })
     } catch (error) {

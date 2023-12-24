@@ -13,7 +13,7 @@ router.post ('/api/proveedor', async (req, res) => {
         const proveedores = await pool.query ('SELECT * FROM proveedores WHERE id = ?', [new_proveedor.insertId])
 
         return res.json ({
-            proveedores: proveedores[0],
+            proveedor: proveedores[0],
             success: true
         })
     } catch (error) {

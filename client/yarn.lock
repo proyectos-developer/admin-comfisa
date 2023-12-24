@@ -7741,7 +7741,7 @@ react-app-polyfill@^3.0.0:
     regenerator-runtime "^0.13.9"
     whatwg-fetch "^3.6.2"
 
-react-avatar-editor@^13.0.0:
+react-avatar-editor@^13.0.2:
   version "13.0.2"
   resolved "https://registry.yarnpkg.com/react-avatar-editor/-/react-avatar-editor-13.0.2.tgz#7ed5a1fd7a9e7bd4b320a3a65df32d3d0e21eb10"
   integrity sha512-a4ajbi7lwDh98kgEtSEeKMu0vs0CHTczkq4Xcxr1EiwMFH1GlgHCEtwGU8q/H5W8SeLnH4KPK8LUjEEaZXklxQ==
