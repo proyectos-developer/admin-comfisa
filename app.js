@@ -70,6 +70,34 @@ app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build', 'index'));
 });
 
+app.get('/home', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home', 'index'));
+});
+
+app.get('/home/proveedores', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/proveedores', 'index'));
+});
+
+app.get('/home/proveedores/nuevo-producto', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/proveedores/nuevo-proveedor', 'index'));
+});
+
+app.get('/home/proveedores/detalles-proveedor/:id_proveedor', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/proveedores/detalles-proveedor/:id_proveedor', 'index'));
+});
+
+app.get('/home/productos', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos', 'index'));
+});
+
+app.get('/home/productos/nuevo-producto', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/nuevo-producto', 'index'));
+});
+
+app.get('/home/productos/detalles-producto/:id_producto', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
+});
+
 //Iniciar el servidor
 app.listen (app.get('port'), () => {
     console.log ('Server en puerto ', app.get ('port'))
