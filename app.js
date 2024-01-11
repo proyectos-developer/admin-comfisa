@@ -78,7 +78,7 @@ app.get('/home/proveedores', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/proveedores', 'index'));
 });
 
-app.get('/home/proveedores/nuevo-producto', (req, res) => {
+app.get('/home/proveedores/nuevo-proveedor', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/proveedores/nuevo-proveedor', 'index'));
 });
 
