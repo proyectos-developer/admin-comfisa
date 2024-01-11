@@ -37,7 +37,7 @@ export default function PanelBegin({proporcional}) {
         window.localStorage.setItem('correo', login_user.user.user.correo)
         window.localStorage.setItem('session_id', login_user.user.session_id)
         dispatch(begindata(beginConstants({}, true, 0).login_user))
-        //navigate ('/home')
+        navigate ('/home')
       }else if (login_user && login_user.success === false && login_user.message){
         setMessage (login_user.message.message)
       }
