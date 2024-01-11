@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AvatarEditor from 'react-avatar-editor'
 
+import icono_add from '../../assets/iconos/icono_add_blue_96.png'
 import icono_editar from '../../assets/iconos/icono_editar_blue_96.png'
 import icono_cancelar from '../../assets/iconos/icono_cancelar_blue_96.png'
 import icono_volver from '../../assets/iconos/icono_volver_blue_96.png'
@@ -175,19 +176,17 @@ export default function DetallesProducto({proporcional}) {
     }
 
     const actualizar_producto = () => {
-        if (foto_uno === '' || nombre_producto === '' || descripcion === ''){
-            setEFotoUno(foto_uno === '' ? true : false)
+        if (nombre_producto === ''){
             setENombreProducto(nombre_producto === '' ? true : false)
-            setEDescripcion(edescripcion === '' ? true : false)
         }else{
             const update_data = {
                 id_proveedor: id_proveedor,
-                proveedor: proveedor,
-                foto_uno: dataeditoruno === null ? '' : dataeditoruno.getImageScaledToCanvas().toDataURL(),
-                foto_dos: dataeditordos === null ? '' : dataeditordos.getImageScaledToCanvas().toDataURL(),
-                foto_tres: dataeditortres === null ? '' : dataeditortres.getImageScaledToCanvas().toDataURL(),
-                foto_cuatro: dataeditorcuatro === null ? '' : dataeditorcuatro.getImageScaledToCanvas().toDataURL(),
-                foto_cinco: dataeditorcinco === null ? '' : dataeditorcinco.getImageScaledToCanvas().toDataURL(),
+                proveedor: proveedor, 
+                foto_uno: '',
+                foto_dos: '',
+                foto_tres: '',
+                foto_cuatro: '',
+                foto_cinco: '',
                 producto: nombre_producto,
                 descripcion: descripcion,
                 caracteristica_uno: caracteristica_uno,
@@ -207,40 +206,52 @@ export default function DetallesProducto({proporcional}) {
         <div className='position-relative' 
             style={{width: '100%', paddingLeft: 500 / proporcional, paddingRight: 500 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
             <div className='d-flex' style={{width: 920 / proporcional, height: 262 / proporcional, marginBottom: 50 / proporcional}}>
-                <div style={{width: 262 / proporcional, height: 262 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
-                    {
-                        foto_uno === '' ? ( 
-                            <div className='position-relative' 
-                                style={{width: 260 / proporcional, height: 260 / proporcional}}>
-                                <div style={{width: 260 / proporcional, height: 260 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
-                                <div id='imagen' className='position-absolute translate-middle' type='button' onClick={editar ? () => handle_editar_picture_uno() : null}
-                                    style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-producto-uno' onChange={editar ? (event) => handle_image_change_uno(event) : null} />
+                <div style={{width: 372 / proporcional, height: 280 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
+                        {
+                            foto_uno === '' && !editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className='position-relative' 
-                                style={{width: 260 / proporcional, height: 260 / proporcional}}>
-                                <AvatarEditor
-                                    width={260 / proporcional}
-                                    height={260 / proporcional}
-                                    image={foto_uno}
-                                    color={[255, 255, 255, 0]}
-                                    borderRadius={parseFloat(4)}
-                                    scale={1.0}
-                                    ref={(editor) => set_editor_ref_uno(editor)}/>
-                                <div id='imagen' className='position-absolute translate-middle' type='button' onClick={editar ? () => handle_editar_picture_uno() : null}
-                                    style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-producto-uno' onChange={editar ? (event) => handle_image_change_uno(event) : null} />
+                            ) : foto_uno !== '' && !editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <img src={foto_uno} style={{width: 370 / proporcional, height: 278 / proporcional, cursor: 'pointer'}}/>
                                 </div>
-                            </div>
-                        )
-                    }
-                </div>
+                            )  : foto_uno === '' && editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
+                                    <div id='imagen' className='position-absolute start-50 translate-middle' type='button' onClick={() => {editar ? handle_editar_picture_uno() : null}}
+                                        style={{bottom: -48 / proporcional, width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-producto-uno' onChange={(event) => {editar ? handle_image_change_uno(event) : null}} />
+                                    </div>
+                                </div>
+                            ) : foto_uno !== '' && editar ? (
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div className='position-absolute' style={{width: 278 / proporcional, height: 236 / proporcional, top: 0 / proporcional, left: -42 / proporcional}}>
+                                        <AvatarEditor
+                                            width={278 / proporcional}
+                                            height={236 / proporcional}
+                                            image={foto_uno}
+                                            color={[255, 255, 255, 0]}
+                                            borderRadius={parseFloat(4)}
+                                            scale={1.0}
+                                            ref={(editor) => set_editor_ref_uno(editor)}/>
+                                    </div>
+                                    <div id='imagen' className='position-absolute' type='button' onClick={() => {editar ? handle_editar_picture_uno() : null}}
+                                        style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-producto-uno' onChange={(event) => {editar ? handle_image_change_uno(event) : null}} />
+                                    </div>
+                                </div>
+                            ) : null
+                        }
+                    </div>
                 <div style={{width: 600 / proporcional, height: 262 / proporcional, marginLeft: 25 / proporcional}}>
                     <div className='d-flex justify-content-end' style={{width: 600 / proporcional, marginBottom: 5 / proporcional}}>
                         <div className='d-flex shadow-sm bg-white rounded' 
@@ -612,6 +623,20 @@ export default function DetallesProducto({proporcional}) {
                             </p>
                         </div>
                         <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                        {
+                            !editar ? (
+                                <div style={{width: 270 / proporcional, height: 'auto'}}>
+                                    <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
+                                        onClick={() => {navigate ('/home/productos/nuevo-producto'); dispatch(set_open_menu_derecho(!open_menu_derecho))}}>
+                                        <img src={editar ? icono_cancelar : icono_add} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
+                                        <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                            Nuevo producto
+                                        </p>
+                                    </div>
+                                    <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                                </div>
+                            ) : null
+                        }
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
                             onClick={editar ? () => {dispatch(set_open_menu_derecho(false)); actualizar_producto ()} :
                                               () => {navigate('/home/productos'); dispatch(set_open_menu_derecho(false))}}>

@@ -50,7 +50,7 @@ export default function ListaProductos({proporcional}) {
         if (get_productos_filtro_total && get_productos_filtro_total.productos && get_productos_filtro_total.success === true){
             let data = get_productos_filtro_total.productos.length
             let lista = []
-            let cuenta = data / 4 < 1 ? 1 : data % 4 !== 0 ? (data / 4) + 1 : data / 4
+            let cuenta = data / 3 < 1 ? 1 : data % 3 !== 0 ? (data / 3) + 1 : data / 3
             for (let count = 0; count < cuenta; count ++){
                 lista.push ({num: `${count + 1}`})
             }
@@ -137,23 +137,18 @@ export default function ListaProductos({proporcional}) {
                                 <div key={numprov} className='d-flex' 
                                     style={{marginBottom: 12.5 / proporcional}}>
                                     {
-                                        productos[(4 *  numprov)] ? ( 
-                                            <CardProducto producto={productos[(4 *  numprov)]} key={(4 *  numprov)} index={(4 *  numprov)} proporcional={proporcional}/>
+                                        productos[(3 *  numprov)] ? ( 
+                                            <CardProducto producto={productos[(3 *  numprov)]} key={(3 *  numprov)} index={(3 *  numprov)} proporcional={proporcional}/>
                                         ) : null
                                     }
                                     {
-                                        productos[(4 *  numprov) + 1] ? ( 
-                                            <CardProducto producto={productos[(4 *  numprov) + 1]} key={(4 *  numprov) + 1} index={(4 *  numprov) + 1} proporcional={proporcional}/>
+                                        productos[(3 *  numprov) + 1] ? ( 
+                                            <CardProducto producto={productos[(3 *  numprov) + 1]} key={(3 *  numprov) + 1} index={(3 *  numprov) + 1} proporcional={proporcional}/>
                                         ) : null
                                     }
                                     {
-                                        productos[(4 *  numprov) + 2] ? ( 
-                                            <CardProducto producto={productos[(4 *  numprov) + 2]} key={(4 *  numprov) + 2} index={(4 *  numprov) + 2} proporcional={proporcional}/>
-                                        ) : null
-                                    }
-                                    {
-                                        productos[(4 *  numprov) + 3] ? ( 
-                                            <CardProducto producto={productos[(4 *  numprov) + 3]} key={(4 *  numprov) + 3} index={(4 *  numprov) + 3} proporcional={proporcional}/>
+                                        productos[(3 *  numprov) + 2] ? ( 
+                                            <CardProducto producto={productos[(3 *  numprov) + 2]} key={(3 *  numprov) + 2} index={(3 *  numprov) + 2} proporcional={proporcional}/>
                                         ) : null
                                     }
                                 </div>

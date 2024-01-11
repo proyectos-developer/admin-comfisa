@@ -175,10 +175,8 @@ export default function DetallesProductoTablet({proporcional}) {
     }
 
     const actualizar_producto = () => {
-        if (foto_uno === '' || nombre_producto === '' || descripcion === ''){
-            setEFotoUno(foto_uno === '' ? true : false)
+        if (nombre_producto === ''){
             setENombreProducto(nombre_producto === '' ? true : false)
-            setEDescripcion(edescripcion === '' ? true : false)
         }else{
             const update_data = {
                 id_proveedor: id_proveedor,
@@ -612,6 +610,20 @@ export default function DetallesProductoTablet({proporcional}) {
                             </p>
                         </div>
                         <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                        {
+                            !editar ? (
+                                <div style={{width: 270 / proporcional, height: 'auto'}}>
+                                    <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
+                                        onClick={() => {navigate ('/home/productos/nuevo-producto'); dispatch(set_open_menu_derecho(!open_menu_derecho))}}>
+                                        <img src={editar ? icono_cancelar : icono_add} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
+                                        <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                            Nuevo producto
+                                        </p>
+                                    </div>
+                                    <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                                </div>
+                            ) : null
+                        }
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
                             onClick={editar ? () => {dispatch(set_open_menu_derecho(false)); actualizar_producto ()} :
                                               () => {navigate('/home/productos'); dispatch(set_open_menu_derecho(false))}}>

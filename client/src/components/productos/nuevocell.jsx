@@ -149,10 +149,8 @@ export default function NuevoProductoCell({proporcional}) {
     }
 
     const guardar_producto = () => {
-        if (foto_uno === '' || nombre_producto === '' || descripcion === ''){
-            setEFotoUno(foto_uno === '' ? true : false)
-            setENombreProveedor(nombre_producto === '' ? true : false)
-            setEDescripcion(edescripcion === '' ? true : false)
+        if (nombre_producto === ''){
+            setENombreProducto(nombre_producto === '' ? true : false)
         }else{
             const nuevo_producto = {
                 id_proveedor: id_proveedor,

@@ -18,6 +18,7 @@ import menu_cerrar_sesion  from '../../assets/iconos/icono_menu_cerrar_sesion.pn
 
 import {begindata} from '../../redux/slice/begindata'
 import { beginConstants } from '../../uri/begin-constants'
+import ModalCargando from '../modal/cargando'
 
 export default function HomePanelTablet({proporcional}) {
 
@@ -27,6 +28,7 @@ export default function HomePanelTablet({proporcional}) {
   const [open_derecho, setOpenDerecho] = useState (false)
   
   const {log_out} = useSelector(({begin}) => begin)
+  const proveedores = useSelector (({proveedores}) => proveedores)
 
   const [open, setOpen] = useState (false)
   
@@ -136,7 +138,8 @@ export default function HomePanelTablet({proporcional}) {
             </div>
           ) : null
         }   
-        <Outlet/>     
+        <Outlet/>  
+        <ModalCargando loading={proveedores.loading}/>   
     </div>
   )
 }

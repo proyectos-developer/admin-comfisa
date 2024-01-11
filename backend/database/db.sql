@@ -65,3 +65,22 @@ ALTER TABLE productos_proveedor
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
 
 DESCRIBE productos_proveedor;
+
+/**Productos carrito **/
+CREATE TABLE carrito_cotizacion(
+    id INT(11) NOT NULL,
+    id_producto INT (11) NOT NULL,
+    usuario VARCHAR (100) NOT NULL,
+    cantidad VARCHAR (100) NOT NULL,
+    comentarios VARCHAR (500) NOT NULL,
+    shop_id VARCHAR (100) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp 
+);
+
+ALTER TABLE carrito_cotizacion
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE carrito_cotizacion
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE carrito_cotizacion;

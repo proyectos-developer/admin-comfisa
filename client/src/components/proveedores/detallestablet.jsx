@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import AvatarEditor from 'react-avatar-editor'
 
+import icono_add from '../../assets/iconos/icono_add_blue_96.png'
 import icono_editar from '../../assets/iconos/icono_editar_blue_96.png'
 import icono_cancelar from '../../assets/iconos/icono_cancelar_blue_96.png'
 import icono_volver from '../../assets/iconos/icono_volver_blue_96.png'
@@ -87,7 +88,7 @@ export default function DetallesProveedorTablet({proporcional}) {
             setEDescripcion(edescripcion === '' ? true : false)
         }else{
             const update_proveedor = {
-                logo: foto_logo,
+                logo: dataeditor === null ? '' : dataeditor.getImageScaledToCanvas().toDataURL(),
                 proveedor: nombre_proveedor,
                 descripcion: descripcion,
                 nro_telefono: nro_telefono,
@@ -104,39 +105,51 @@ export default function DetallesProveedorTablet({proporcional}) {
             style={{width: '100%', paddingLeft: 60 / proporcional, paddingRight: 60 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
             <div className='d-flex' style={{width: 871 / proporcional, height: 278 / proporcional, marginBottom: 50 / proporcional}}>
                 <div style={{width: 372 / proporcional, height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
-                    {
-                        foto_logo === '' ? ( 
-                            <div className='position-relative' 
-                                style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
-                                <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                <div id='imagen' className='position-absolute' type='button' onClick={() => {editar ? handle_editar_picture() : null}}
-                                    style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-proveedor' onChange={(event) => {editar ? handle_image_change(event) : null}} />
+                        {
+                            foto_logo === '' && !editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
                                 </div>
-                            </div>
-                        ) : (
-                            <div className='position-relative' 
-                                style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
-                                <AvatarEditor
-                                    width={370 / proporcional}
-                                    height={278 / proporcional}
-                                    image={foto_logo}
-                                    color={[255, 255, 255, 0]}
-                                    borderRadius={parseFloat(4)}
-                                    scale={1.0}
-                                    ref={(editor) => set_editor_ref(editor)}/>
-                                <div id='imagen' className='position-absolute' type='button' onClick={() => {editar ? handle_editar_picture() : null}}
-                                    style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-proveedor' onChange={(event) => {editar ? handle_image_change(event) : null}} />
+                            ) : foto_logo !== '' && !editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <img src={foto_logo} style={{width: 370 / proporcional, height: 278 / proporcional, cursor: 'pointer'}}/>
                                 </div>
-                            </div>
-                        )
-                    }
-                </div>
+                            )  : foto_logo === '' && editar ? ( 
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
+                                    <div id='imagen' className='position-absolute start-50 translate-middle' type='button' onClick={() => {editar ? handle_editar_picture() : null}}
+                                        style={{bottom: -48 / proporcional, width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-proveedor' onChange={(event) => {editar ? handle_image_change(event) : null}} />
+                                    </div>
+                                </div>
+                            ) : foto_logo !== '' && editar ? (
+                                <div className='position-relative' 
+                                    style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                    <div className='position-absolute' style={{width: 278 / proporcional, height: 236 / proporcional, top: 0 / proporcional, left: -42 / proporcional}}>
+                                        <AvatarEditor
+                                            width={278 / proporcional}
+                                            height={236 / proporcional}
+                                            image={foto_logo}
+                                            color={[255, 255, 255, 0]}
+                                            borderRadius={parseFloat(4)}
+                                            scale={1.0}
+                                            ref={(editor) => set_editor_ref(editor)}/>
+                                    </div>
+                                    <div id='imagen' className='position-absolute' type='button' onClick={() => {editar ? handle_editar_picture() : null}}
+                                        style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-proveedor' onChange={(event) => {editar ? handle_image_change(event) : null}} />
+                                    </div>
+                                </div>
+                            ) : null
+                        }
+                    </div>
                 <div style={{width: 451 / proporcional, height: 50 / proporcional, marginLeft: 25 / proporcional}}>
                     <div className='d-flex shadow-sm bg-white rounded' 
                         style={{width: 451 / proporcional, height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
@@ -264,6 +277,20 @@ export default function DetallesProveedorTablet({proporcional}) {
                             </p>
                         </div>
                         <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                        {
+                            !editar ? (
+                                <div style={{width: 270 / proporcional, height: 'auto'}}>
+                                    <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
+                                        onClick={() => {navigate ('/home/proveedores/nuevo-proveedor'); dispatch(set_open_menu_derecho(!open_menu_derecho))}}>
+                                        <img src={editar ? icono_cancelar : icono_add} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
+                                        <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                            Nuevo proveedor
+                                        </p>
+                                    </div>
+                                    <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
+                                </div>
+                            ): null
+                        }
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
                             onClick={editar ? () => {dispatch(set_open_menu_derecho(false)); actualizar_proveedor ()} :
                                               () => {navigate('/home/proveedores'); dispatch(set_open_menu_derecho(false))}}>

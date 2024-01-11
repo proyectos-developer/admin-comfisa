@@ -50,7 +50,7 @@ export default function ListaProveedores({proporcional}) {
         if (get_proveedores_filtro_total && get_proveedores_filtro_total.proveedores && get_proveedores_filtro_total.success === true){
             let data = get_proveedores_filtro_total.proveedores.length
             let lista = []
-            let cuenta = data / 4 < 1 ? 1 : data % 4 !== 0 ? (data / 4) + 1 : data / 4
+            let cuenta = data / 3 < 1 ? 1 : data % 3 !== 0 ? (data / 3) + 1 : data / 3
             for (let count = 0; count < cuenta; count ++){
                 lista.push ({num: `${count + 1}`})
             }
@@ -69,9 +69,10 @@ export default function ListaProveedores({proporcional}) {
     }
 
     const buscar_proveedor_por = () => {
+        console.log ('buscar', buscar_proveedor)
         const id = filtros.id
-        const order_by = value.split('-')[0]
-        const order = value.split('-')[1]
+        const order_by = filtros.order_by
+        const order = filtros.order
         dispatch (set_filtro_proveedores_search_order_amount({pagina: 'proveedores', id: id, search: buscar_proveedor, order_by: order_by, order: order}))
         dispatch(proveedoresdata(proveedoresConstants(id, buscar_proveedor, order_by, order, {}, false).get_proveedores_filtro_total))
     }
@@ -103,7 +104,7 @@ export default function ListaProveedores({proporcional}) {
                             style={{width: 394 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                     cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
                             className='form-select fira-fans-sans-serif border-0'
-                            onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
+                            onChange={(event) => seleccionar_ordenar_por(event.target.value)}
                         >
                             <option value='0'>Ordenar por:</option>
                             <option value='proveedor-ASC'>Nombre proveedor A-Z</option>
@@ -135,23 +136,18 @@ export default function ListaProveedores({proporcional}) {
                                 <div key={numprov} className='d-flex' 
                                     style={{marginBottom: 12.5 / proporcional}}>
                                     {
-                                        proveedores[(4 *  numprov)] ? ( 
-                                            <CardProveedor proveedor={proveedores[(4 *  numprov)]} key={(4 *  numprov)} index={(4 *  numprov)} proporcional={proporcional}/>
+                                        proveedores[(3 *  numprov)] ? ( 
+                                            <CardProveedor proveedor={proveedores[(3 *  numprov)]} key={(3 *  numprov)} index={(3 *  numprov)} proporcional={proporcional}/>
                                         ) : null
                                     }
                                     {
-                                        proveedores[(4 *  numprov) + 1] ? ( 
-                                            <CardProveedor proveedor={proveedores[(4 *  numprov) + 1]} key={(4 *  numprov) + 1} index={(4 *  numprov) + 1} proporcional={proporcional}/>
+                                        proveedores[(3 *  numprov) + 1] ? ( 
+                                            <CardProveedor proveedor={proveedores[(3 *  numprov) + 1]} key={(3 *  numprov) + 1} index={(3 *  numprov) + 1} proporcional={proporcional}/>
                                         ) : null
                                     }
                                     {
-                                        proveedores[(4 *  numprov) + 2] ? ( 
-                                            <CardProveedor proveedor={proveedores[(4 *  numprov) + 2]} key={(4 *  numprov) + 2} index={(4 *  numprov) + 2} proporcional={proporcional}/>
-                                        ) : null
-                                    }
-                                    {
-                                        proveedores[(4 *  numprov) + 3] ? ( 
-                                            <CardProveedor proveedor={proveedores[(4 *  numprov) + 3]} key={(4 *  numprov) + 3} index={(4 *  numprov) + 3} proporcional={proporcional}/>
+                                        proveedores[(3 *  numprov) + 2] ? ( 
+                                            <CardProveedor proveedor={proveedores[(3 *  numprov) + 2]} key={(3 *  numprov) + 2} index={(3 *  numprov) + 2} proporcional={proporcional}/>
                                         ) : null
                                     }
                                 </div>

@@ -31,11 +31,11 @@ export default function NuevoProducto({proporcional}) {
     const [foto_cinco, setFotoCinco] = useState('')
     const [nombre_producto, setNombreProducto] = useState('')
     const [descripcion, setDescripcion] = useState('')
-    const [caracteristicas_uno, setCaracteristicasUno] = useState('')
-    const [caracteristicas_dos, setCaracteristicasDos] = useState('')
-    const [caracteristicas_tres, setCaracteristicasTres] = useState('')
-    const [caracteristicas_cuatro, setCaracteristicasCuatro] = useState('')
-    const [caracteristicas_cinco, setCaracteristicasCinco] = useState('')
+    const [caracteristicas_uno, setCaracteristicaUno] = useState('')
+    const [caracteristicas_dos, setCaracteristicaDos] = useState('')
+    const [caracteristicas_tres, setCaracteristicaTres] = useState('')
+    const [caracteristicas_cuatro, setCaracteristicaCuatro] = useState('')
+    const [caracteristicas_cinco, setCaracteristicaCinco] = useState('')
     const [count_descripcion, setCountDescripcion] = useState(500)
     const [count_caracteristica_uno, setCountCaracteristicaUno] = useState(500)
     const [count_caracteristica_dos, setCountCaracteristicaDos] = useState(500)
@@ -45,6 +45,8 @@ export default function NuevoProducto({proporcional}) {
     const [cantidad, setCantidad] = useState('')
     const [medida, setMedida] = useState(true)
     const [mostrar, setMostrar] = useState(true)
+
+    const [otro_producto, setOtroProducto] = useState (false)
     
     const [efoto_uno, setEFotoUno] = useState('')
     const [enombre_producto, setENombreProveedor] = useState('')
@@ -71,10 +73,30 @@ export default function NuevoProducto({proporcional}) {
     }, [get_proveedores])
 
     useEffect (() => {
-        console.log (new_producto)
         if (new_producto && new_producto.success === true && new_producto.producto){
             dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_producto))
-            navigate(`/home/productos/detalles-producto/${new_producto.producto.id}`)
+            if (otro_producto){
+                setIdProveedor('')
+                setProveedor('')
+                setNombreProducto('')
+                setDescripcion('')
+                setCaracteristicaUno('')
+                setCaracteristicaDos('')
+                setCaracteristicaTres('')
+                setCaracteristicaCuatro('')
+                setCaracteristicaCinco('')
+                setFotoUno('')
+                setFotoDos('')
+                setFotoTres('')
+                setFotoCuatro('')
+                setFotoCinco('')
+                setCantidad('')
+                setMostrar(true)
+                navigate(`/home/productos/nuevo-producto`)
+                document.getElementById('id_proveedor').value = '0'
+            }else{
+                navigate(`/home/productos/detalles-producto/${new_producto.producto.id}`)
+            }
         }
     }, [new_producto])
 
@@ -148,19 +170,19 @@ export default function NuevoProducto({proporcional}) {
         setFotoCinco (image)
     }
 
-    const guardar_producto = () => {
-        if (foto_uno === '' || nombre_producto === '' || descripcion === ''){
-            setEFotoUno(foto_uno === '' ? true : false)
+    const guardar_producto = (otro) => {
+        if (nombre_producto === ''){
             setENombreProveedor(nombre_producto === '' ? true : false)
-            setEDescripcion(edescripcion === '' ? true : false)
         }else{
+            setOtroProducto (otro)
             const nuevo_producto = {
                 id_proveedor: id_proveedor,
-                foto_uno: dataeditoruno === null ? '' : dataeditoruno.getImageScaledToCanvas().toDataURL(),
-                foto_dos: dataeditordos === null ? '' : dataeditordos.getImageScaledToCanvas().toDataURL(),
-                foto_tres: dataeditortres === null ? '' : dataeditortres.getImageScaledToCanvas().toDataURL(),
-                foto_cuatro: dataeditorcuatro === null ? '' : dataeditorcuatro.getImageScaledToCanvas().toDataURL(),
-                foto_cinco: dataeditorcinco === null ? '' : dataeditorcinco.getImageScaledToCanvas().toDataURL(),
+                proveedor: proveedor,
+                foto_uno: '',
+                foto_dos: '',
+                foto_tres: '',
+                foto_cuatro: '',
+                foto_cinco: '',
                 producto: nombre_producto,
                 descripcion: descripcion,
                 caracteristica_uno: caracteristicas_uno,
@@ -171,7 +193,6 @@ export default function NuevoProducto({proporcional}) {
                 cantidad: cantidad,
                 mostrar: true
             }
-            console.log (nuevo_producto)
             dispatch(productosdata(productosConstants(0, 0, 0, 0, nuevo_producto, false).new_producto))
         }
     }
@@ -223,14 +244,14 @@ export default function NuevoProducto({proporcional}) {
                                 style={{fontFamily: 'Mukta, sans-serif', width: 288 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
                                         }}
                                 className='form-select border-0 '
-                                onChange={(event) => {setIdProveedor(event.target.value)}}
+                                onChange={(event) => {setIdProveedor(event.target.value.split('-')[0]); setProveedor(event.target.value.split('-')[1])}}
                                 id='id_proveedor'>
-                                <option value='0'>Seleccionar</option>
+                                <option value='0'>Seleccionar proveedor</option>
                                 {
                                     lista_proveedores && lista_proveedores.length > 0 ? (
                                         lista_proveedores.map ((proveedor, index) => {
                                             return (
-                                                <option value={proveedor.id}>{proveedor.proveedor}</option>
+                                                <option key={index} value={proveedor.id + '-' + proveedor.proveedor}>{proveedor.proveedor}</option>
                                             )
                                         })
                                     ) : null
@@ -338,7 +359,7 @@ export default function NuevoProducto({proporcional}) {
                             cols={2}
                             className='form-control border-0 '
                             value={caracteristicas_uno}
-                            onChange={(event) => {setCaracteristicasUno(event.target.value); setCountCaracteristicaUno(count_caracteristica_uno.length -1)}}
+                            onChange={(event) => {setCaracteristicaUno(event.target.value); setCountCaracteristicaUno(count_caracteristica_uno.length -1)}}
                             id='caracteristicas_uno'
                             placeholder='Característica uno'/>
                     </div>
@@ -357,7 +378,7 @@ export default function NuevoProducto({proporcional}) {
                             cols={2}
                             className='form-control border-0 '
                             value={caracteristicas_dos}
-                            onChange={(event) => {setCaracteristicasDos(event.target.value); setCaracteristicaDos(count_caracteristica_dos.length -1)}}
+                            onChange={(event) => {setCaracteristicaDos(event.target.value); setCaracteristicaDos(count_caracteristica_dos.length -1)}}
                             id='caracteristicas_dos'
                             placeholder='Característica dos'/>
                     </div>
@@ -376,7 +397,7 @@ export default function NuevoProducto({proporcional}) {
                             cols={2}
                             className='form-control border-0 '
                             value={caracteristicas_tres}
-                            onChange={(event) => {setCaracteristicasTres(event.target.value); setCaracteristicaTres(count_caracteristica_tres.length -1)}}
+                            onChange={(event) => {setCaracteristicaTres(event.target.value); setCaracteristicaTres(count_caracteristica_tres.length -1)}}
                             id='caracteristicas_tres'
                             placeholder='Característica tres'/>
                     </div>
@@ -395,7 +416,7 @@ export default function NuevoProducto({proporcional}) {
                             cols={2}
                             className='form-control border-0 '
                             value={caracteristicas_cuatro}
-                            onChange={(event) => {setCaracteristicasCuatro(event.target.value); setCaracteristicaCuatro(count_caracteristica_cuatro.length -1)}}
+                            onChange={(event) => {setCaracteristicaCuatro(event.target.value); setCaracteristicaCuatro(count_caracteristica_cuatro.length -1)}}
                             id='caracteristicas_cuatro'
                             placeholder='Característica cuatro'/>
                     </div>
@@ -414,7 +435,7 @@ export default function NuevoProducto({proporcional}) {
                             cols={2}
                             className='form-control border-0 '
                             value={caracteristicas_cinco}
-                            onChange={(event) => {setCaracteristicasCinco(event.target.value); setCaracteristicaCinco(count_caracteristica_cinco.length -1)}}
+                            onChange={(event) => {setCaracteristicaCinco(event.target.value); setCaracteristicaCinco(count_caracteristica_cinco.length -1)}}
                             id='caracteristicas_cinco'
                             placeholder='Característica cinco'/>
                     </div>
@@ -567,11 +588,19 @@ export default function NuevoProducto({proporcional}) {
                 open_menu_derecho ? ( 
                     <div className='position-absolute shadow rounded' 
                             style={{width: 330 / proporcional, padding: 30 / proporcional, top: -60 / proporcional, right: 20 / proporcional, background: 'white'}}>
+                            <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
+                                onClick={() => {guardar_producto(false); dispatch(set_open_menu_derecho(false))}}>
+                                <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
+                                <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                    Guardar producto
+                                </p>
+                            </div>
+                            <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
-                            onClick={() => {guardar_producto(); dispatch(set_open_menu_derecho(false))}}>
+                            onClick={() => {guardar_producto(true); dispatch(set_open_menu_derecho(false))}}>
                             <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
                             <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
-                                Guardar producto
+                                Guardar y agregar otro producto
                             </p>
                         </div>
                         <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>

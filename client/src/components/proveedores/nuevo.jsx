@@ -34,12 +34,12 @@ export default function NuevoProveedor({proporcional}) {
     const [enro_ruc, setENroRuc] = useState('')
 
     const {new_proveedor} = useSelector(({proveedores}) => proveedores)
+    const proveedores = useSelector(({proveedores}) => proveedores)
     const {open_menu_derecho} = useSelector(({data}) => data)
 
     let dataeditor = null
 
     useEffect (() => {
-        console.log (new_proveedor)
         if (new_proveedor && new_proveedor.success === true && new_proveedor.proveedor){
             dispatch(proveedoresdata(proveedoresConstants(0, 0, 0, 0, {}, true).new_proveedor))
             navigate(`/home/proveedores/detalles-proveedor/${new_proveedor.proveedor.id}`)
