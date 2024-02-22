@@ -43,6 +43,11 @@ DESCRIBE proveedores;
 CREATE TABLE productos_proveedor(
     id INT(11) NOT NULL,
     id_proveedor INT (11) NOT NULL,
+    proveedor VARCHAR (100) NOT NULL,
+    id_tipo INT (11) NOT NULL,
+    nombre_tipo VARCHAR (100) NOT NULL,
+    id_medida INT (11) NOT NULL,
+    medida VARCHAR (100) NOT NULL
     producto VARCHAR (100) NOT NULL,
     descripcion VARCHAR (1000) NOT NULL,
     caracteristica_uno VARCHAR (500) NOT NULL,
@@ -55,6 +60,11 @@ CREATE TABLE productos_proveedor(
     foto_tres TEXT NOT NULL,
     foto_cuatro TEXT NOT NULL,
     foto_cinco TEXT NOT NULL,
+    foto_seis TEXT NOT NULL,
+    foto_siete TEXT NOT NULL,
+    foto_ocho TEXT NOT NULL,
+    foto_nueve TEXT NOT NULL,
+    foto_diez TEXT NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp 
 );
 
@@ -84,3 +94,90 @@ ALTER TABLE carrito_cotizacion
     MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
 
 DESCRIBE carrito_cotizacion;
+
+/**Clientes página**/
+CREATE TABLE clientes(
+    id INT(11) NOT NULL,
+    correo VARCHAR (100) NOT NULL,
+    nro_telefono VARCHAR (100) NOT NULL,
+    password VARCHAR (60) NOT NULL,
+    usuario VARCHAR (100) NOT NULL
+);
+
+ALTER TABLE clientes
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE clientes
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE clientes;
+
+/**Info cliente página**/
+CREATE TABLE info_clientes(
+    id INT(11) NOT NULL,
+    nombres VARCHAR (100) NOT NULL,
+    apellidos VARCHAR (100) NOT NULL,
+    correo VARCHAR (100) NOT NULL,
+    nro_telefono VARCHAR (100) NOT NULL,
+    usuario VARCHAR (100) NOT NULL
+);
+
+ALTER TABLE info_clientes
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE info_clientes
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE info_clientes;
+
+/**Favoritos cliente página**/
+CREATE TABLE favoritos(
+    id INT(11) NOT NULL,
+    id_producto VARCHAR (100) NOT NULL,
+    usuario VARCHAR (100) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp 
+);
+
+ALTER TABLE favoritos
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE favoritos
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE favoritos;
+
+/**Tipo producto proveedor**/
+CREATE TABLE tipo_producto_proveedor(
+    id INT(11) NOT NULL,
+    id_proveedor INT(11) NOT NULL,_
+    proveedor VARCHAR (100) NOT NULL,
+    nombre_tipo VARCHAR (100) NOT NULL
+    created_at timestamp NOT NULL DEFAULT current_timestamp 
+);
+
+ALTER TABLE tipo_producto_proveedor
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE tipo_producto_proveedor
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE tipo_producto_proveedor;
+
+/**Media del tipo producto proveedor**/
+CREATE TABLE medida_tipo_producto(
+    id INT(11) NOT NULL,
+    id_proveedor INT(11) NOT NULL,
+    proveedor VARCHAR (100) NOT NULL,
+    id_tipo INT(11) NOT NULL,
+    nombre_tipo VARCHAR (100) NOT NULL,
+    medida VARCHAR (100) NOT NULL,
+    created_at timestamp NOT NULL DEFAULT current_timestamp 
+);
+
+ALTER TABLE medida_tipo_producto
+    ADD PRIMARY KEY(id);
+
+ALTER TABLE medida_tipo_producto
+    MODIFY id INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 1;
+
+DESCRIBE medida_tipo_producto;
