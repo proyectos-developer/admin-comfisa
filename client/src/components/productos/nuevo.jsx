@@ -225,7 +225,7 @@ export default function NuevoProducto({proporcional}) {
                                     className='form-select border-0 '
                                     onChange={(event) => buscar_datos_tipo_proucto(event.target.value)}
                                     id='id_tipo_producto'>
-                                    <option value='0'>Seleccionar tipo producto</option>
+                                    <option value='0'>{tipo_producto === '' ? 'Seleccionar tipo proucto' : tipo_producto}</option>
                                     <option value='00'>Agregar nuevo</option>
                                     {
                                         lista_tipo_productos && lista_tipo_productos.length > 0 ? (
