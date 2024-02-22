@@ -259,7 +259,7 @@ router.post('/api/medida', async (req, res) => {
 
         const new_medida = await pool.query ('INSERT INTO medida_tipo_producto set ?', [newMedida])
         const medida = await pool.query ('SELECT * FROM medida_tipo_producto WHERE id = ?', [new_medida.insertId])
-        const medidas = await pool.query ('SELECT * FROM medida_tipo_proucto WHERE id_tipo = ?', [id_tipo])
+        const medidas = await pool.query ('SELECT * FROM medida_tipo_producto WHERE id_tipo = ?', [id_tipo])
 
         return res.json ({
             medida: medida [0],
