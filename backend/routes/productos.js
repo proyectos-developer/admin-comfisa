@@ -7,13 +7,13 @@ const { isLoggedIn } = require('../lib/auth')
 router.post ('/api/producto', async (req, res) => {
     const {id_proveedor, proveedor, id_tipo, nombre_tipo, id_medida, medida, producto, descripcion, 
         caracteristica_uno, caracteristica_dos, caracteristica_tres, caracteristica_cuatro, caracteristica_cinco, 
-        foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez,
+        foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez, uniad,
         cantidad, mostrar} = req.body
 
     try {
         const newProducto = {id_proveedor, proveedor, id_tipo, nombre_tipo, id_medida, medida, producto, descripcion, 
             caracteristica_uno, caracteristica_dos, caracteristica_tres, caracteristica_cuatro, caracteristica_cinco, 
-            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez,
+            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez, uniad,
             cantidad, mostrar}
         const new_producto = await pool.query ('INSERT INTO productos_proveedor set ?', [newProducto])
         const productos = await pool.query ('SELECT * FROM productos_proveedor WHERE id = ?', [new_producto.insertId])
@@ -33,14 +33,14 @@ router.post ('/api/producto', async (req, res) => {
 router.post ('/api/producto/:id_producto', async (req, res) => {
     const {id_proveedor, proveedor, id_tipo, nombre_tipo, id_medida, medida, producto, descripcion, 
             caracteristica_uno, caracteristica_dos, caracteristica_tres, caracteristica_cuatro, caracteristica_cinco, 
-            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez,
+            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez, uniad,
             cantidad, mostrar} = req.body
     const {id_producto} = req.params
 
     try {
         const updateProducto = {id_proveedor, proveedor, id_tipo, nombre_tipo, id_medida, medida, producto, descripcion, 
             caracteristica_uno, caracteristica_dos, caracteristica_tres, caracteristica_cuatro, caracteristica_cinco, 
-            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez,
+            foto_uno, foto_dos, foto_tres, foto_cuatro, foto_cinco, foto_seis, foto_siete, foto_ocho, foto_nueve, foto_diez, uniad,
             cantidad, mostrar}
         await pool.query ('UPDATE productos_proveedor set ?  WHERE id = ?', [updateProducto, id_producto])
         const productos = await pool.query ('SELECT * FROM productos_proveedor WHERE id = ?', [id_producto])
@@ -154,18 +154,20 @@ router.post('/api/tipo_producto', async (req, res) => {
     try {
         const newTipoProducto = {id_proveedor, proveedor, nombre_tipo}
 
-        const new_tipo = await pool.query ('INSERT INTO tipo_producto_proveedor set ?', [newTipoProducto])
-        const tipo_producto = await pool.query ('SELECT * FROM tipo_producto_proveedor WHERE id = ?', [new_tipo.insertId])
+        const new_data       = await pool.query ('INSERT INTO tipo_producto_proveedor set ?', [newTipoProducto])
+        const tipo_producto  = await pool.query ('SELECT * FROM tipo_producto_proveedor WHERE id = ?', [new_data.insertId])
+        const tipo_productos = await pool.query ('SELECT * FROM tipo_producto_proveedor WHERE id_proveedor = ?', [id_proveedor])
 
         return res.json ({
-            tipo_producto: tipo_producto [0],
+            tipo_producto: tipo_producto[0],
+            tipo_productos: tipo_productos,
             success: true
         })
     } catch (error) {
-
         console.log (error)
         return res.json ({
             tipo_producto: {},
+            tipo_productos: [],
             success: false
         })
         
