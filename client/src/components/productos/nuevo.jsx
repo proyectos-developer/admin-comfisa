@@ -55,7 +55,7 @@ export default function NuevoProducto({proporcional}) {
     const [count_caracteristica_cuatro, setCountCaracteristicaCuatro] = useState(250)
     const [count_caracteristica_cinco, setCountCaracteristicaCinco] = useState(250)
     const [cantidad, setCantidad] = useState('')
-    const [unidad, setUnidad] = useState(true)
+    const [unidad, setUnidad] = useState('')
     const [mostrar, setMostrar] = useState(true)
 
     const [otro_producto, setOtroProducto] = useState (false)
@@ -68,7 +68,7 @@ export default function NuevoProducto({proporcional}) {
 
     const {new_producto} = useSelector(({productos}) => productos)
     const {get_proveedores} = useSelector(({proveedores}) => proveedores)
-    const {get_tipo_productos_proveedor, new_tipo_producto} = useSelector(({productos}) => productos)
+    const {get_tipo_productos_proveedor, new_tipo_producto, get_medidas_tipo, new_medida} = useSelector(({productos}) => productos)
     const {open_menu_derecho} = useSelector(({data}) => data)
 
     useEffect (() => {
@@ -84,7 +84,6 @@ export default function NuevoProducto({proporcional}) {
 
     useEffect (() => {
         if (get_tipo_productos_proveedor && get_tipo_productos_proveedor.success === true && get_tipo_productos_proveedor.tipo_productos){
-            console.log (get_tipo_productos_proveedor)
             setListaTipoProductos(get_tipo_productos_proveedor.tipo_productos)
         }
     }, [get_tipo_productos_proveedor])
@@ -99,6 +98,7 @@ export default function NuevoProducto({proporcional}) {
         if (value !== '0' && value !== '00'){
             setIdTipoProducto(value.split('-')[0])
             setTipoProducto(value.split('-')[1])
+            setNombreProducto(value.split('-')[1])
             dispatch(productosdata(productosConstants(value.split('-')[0], 0, 0, 0, {}, false).get_medidas_tipo))
         }else if (value === '00'){
             setNuevoTipoProducto(true)
@@ -116,17 +116,51 @@ export default function NuevoProducto({proporcional}) {
         }
     }
 
+    const guardar_medida_tipo = () => {
+        if (medida !== ''){
+            const new_data = {
+                id_proveedor: id_proveedor,
+                proveedor: proveedor,
+                id_tipo: id_tipo_producto,
+                nombre_tipo: tipo_producto,
+                nombre_medida: medida
+            }
+            console.log (new_data)
+            dispatch (productosdata(productosConstants (0, 0, 0, 0, new_data, false).new_medida))
+        }
+    }
+
     useEffect (() => {
-        console.log (new_tipo_producto)
         if (new_tipo_producto && new_tipo_producto.success === true && new_tipo_producto.tipo_productos && new_tipo_producto.tipo_producto){
             setTipoProducto(new_tipo_producto.tipo_producto.nombre_tipo)
             setIdTipoProducto(new_tipo_producto.tipo_producto.id)
             setNuevoTipoProducto(false)
             setListaTipoProductos(new_tipo_producto.tipo_productos)
+            dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_tipo_producto))
+            setNombreProducto(new_tipo_producto.tipo_producto.nombre_tipo)
+            dispatch (productosdata(productosConstants(new_tipo_producto.tipo_producto.id, 0, 0, 0, {}, false).get_medidas_tipo))
         }
     }, [new_tipo_producto])
 
     useEffect (() => {
+        if (new_medida && new_medida.success === true && new_medida.medidas && new_medida.medida){
+            setMedida(new_medida.medida.nombre_medida)
+            setIdMedida(new_medida.medida.id)
+            setNuevaMedida(false)
+            setListaMedidas(new_medida.medidas)
+            setNombreProducto(tipo_producto + ' ' + new_medida.medida.nombre_medida)
+            dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_medida))
+        }
+    }, [new_medida])
+
+    useEffect(() => {
+        if (get_medidas_tipo && get_medidas_tipo.success === true && get_medidas_tipo.medidas){
+            setListaMedidas(get_medidas_tipo.medidas)
+        }
+    }, [get_medidas_tipo])
+
+    useEffect (() => {
+        console.log (new_producto)
         if (new_producto && new_producto.success === true && new_producto.producto){
             dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_producto))
             if (otro_producto){
@@ -148,11 +182,23 @@ export default function NuevoProducto({proporcional}) {
                 setMostrar(true)
                 navigate(`/home/productos/nuevo-producto`)
                 document.getElementById('id_proveedor').value = '0'
+                document.getElementById('id_tipo_producto').value = '0'
+                document.getElementById('id_medida_producto').value = '0'
             }else{
                 navigate(`/home/productos/detalles-producto/${new_producto.producto.id}`)
             }
         }
     }, [new_producto])
+
+    const seleccion_medida_tipo_producto = (value) => {
+        if (value !== '0' && value !== '00'){
+            setIdMedida(value.split('-')[0])
+            setMedida(value.split('-')[1])
+            setNombreProducto (tipo_producto + ' ' + value.split ('-')[1])
+        }else if (value === '00'){
+            setNuevaMedida(true)
+        }
+    }
 
     const guardar_producto = (otro) => {
         if (nombre_producto === ''){
@@ -162,8 +208,8 @@ export default function NuevoProducto({proporcional}) {
             const nuevo_producto = {
                 id_proveedor: id_proveedor,
                 proveedor: proveedor,
-                id_tipo: id_tipo,
-                tipo_producto, tipo_producto,
+                id_tipo: id_tipo_producto,
+                nombre_tipo: tipo_producto,
                 id_tipo_producto: id_tipo_producto,
                 medida: medida,
                 id_medida: id_medida,
@@ -188,6 +234,7 @@ export default function NuevoProducto({proporcional}) {
                 cantidad: cantidad,
                 mostrar: true
             }
+            console.log (nuevo_producto)
             dispatch(productosdata(productosConstants(0, 0, 0, 0, nuevo_producto, false).new_producto))
         }
     }
@@ -204,7 +251,7 @@ export default function NuevoProducto({proporcional}) {
                             className='form-select border-0 '
                             onChange={(event) => buscar_datos_proveeodr (event.target.value)}
                             id='id_proveedor'>
-                            <option value='0'>Seleccionar proveedor</option>
+                            <option value='0'>{proveedor === '' ? 'Seleccionar proveedor' : proveedor}</option>
                             {
                                 lista_proveedores && lista_proveedores.length > 0 ? (
                                     lista_proveedores.map ((proveedor, index) => {
@@ -258,22 +305,43 @@ export default function NuevoProducto({proporcional}) {
                     }
                     <div className='d-flex shadow-sm bg-white rounded' 
                         style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
-                        <select
-                            style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
-                            className='form-select border-0 '
-                            onChange={(event) => {setIdMedida(event.target.value.split('-')[0]); setMedida(event.target.value.split('-')[1])}}
-                            id='id_tipo_producto'>
-                            <option value='0'>Seleccionar dimensiones</option>
-                            {
-                                lista_medidas && lista_medidas.length > 0 ? (
-                                    lista_medidas.map ((medida, index) => {
-                                        return (
-                                            <option key={index} value={medida.id + '-' + medida.nombre_medida}>{medida.nombre_medida}</option>
-                                        )
-                                    })
-                                ) : null
-                            }
-                        </select>
+                        {
+                            !nueva_medida ? (
+                                <select
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    className='form-select border-0 '
+                                    onChange={(event) => seleccion_medida_tipo_producto (event.target.value)}
+                                    id='id_medida_producto'>
+                                    <option value='0'>{medida === '' ? 'Seleccionar dimensiones' : medida}</option>
+                                    <option value='00'>Agregar nuevo</option>
+                                    {
+                                        lista_medidas && lista_medidas.length > 0 ? (
+                                            lista_medidas.map ((medida, index) => {
+                                                return (
+                                                    <option key={index} value={medida.id + '-' + medida.nombre_medida}>{medida.nombre_medida}</option>
+                                                )
+                                            })
+                                        ) : null
+                                    }
+                                </select>
+                            ) : (
+                                <div className='d-flex shadow-sm bg-white rounded' 
+                                    style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <input
+                                        type='default'
+                                        style={{fontFamily: 'Mukta, sans-serif', width: '90%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                        className='form-control border-0 '
+                                        onChange={(event) => setMedida(event.target.value)}
+                                        value={medida}
+                                        placeholder='Dimensiones Ej. 4 1/2'
+                                        id='medida'/>
+                                    <div className='d-flex justify-content-center' style={{width: '10%', height: 50 / proporcional}}>
+                                        <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 13 / proporcional, cursor: 'pointer'}}
+                                            onClick={() => guardar_medida_tipo ()}/>
+                                    </div>
+                                </div>
+                            )
+                        }
                     </div>
                 </div>
                 <div style={{width: '49%', height: 'auto'}}>
