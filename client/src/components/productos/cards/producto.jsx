@@ -8,19 +8,20 @@ export default function CardProducto({producto, index,proporcional}) {
     const [button, setButton] = useState (false)
 
     return (
-        <div key={index} className='d-flex shadow rounded' style={{width: 386 / proporcional, height: 176 / proporcional, padding: 10 / proporcional, marginLeft: 10 / proporcional,
-          marginRight: 10 / proporcional}}>
+        <div key={index} className='d-flex shadow rounded' style={{width: '32%', height: 'auto', padding: 10 / proporcional}}>
             <div style={{width: 156 / proporcional, height: 156 / proporcional, marginRight: 10 / proporcional}}>
               <img src={producto.foto_uno} style={{width: 156 / proporcional, height: 156 / proporcional}}/>
             </div>
             <div style={{width: 200 / proporcional, height: 156 / proporcional}}>
               <p style={{fontSize: 20 / proporcional, lineHeight: `${30 / proporcional}px`, marginBottom: 0, fontWeight: 700, color: 'rgb(56, 77, 167)'}}>
-                {producto.producto}
+                {producto.proveedor}
               </p>
               <div style={{width: 200 / proporcional, height: 96 / proporcional}}>
-                <p style={{fontSize: 14 / proporcional, lineHeight: `${16 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121', marginRight: 10 / proporcional,
-                          cursor: 'default'}}>
-                  {producto.descripcion.slice (0, 146)}... 
+                <p style={{fontSize: 16 / proporcional, lineHeight: `${20 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121', cursor: 'default'}}>
+                  {producto.producto}
+                </p>
+                <p style={{fontSize: 16 / proporcional, lineHeight: `${20 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121', cursor: 'default'}}>
+                  {producto.nombre_tipo + ' ' + producto.medida}
                 </p>
               </div>
               <div style={{width: 200 / proporcional, height: 30 / proporcional}} className='d-flex justify-content-end'>

@@ -100,7 +100,7 @@ export default function ListaProductos({proporcional}) {
                         style={{width: 396 / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional,
                                 marginLeft: 5 / proporcional, marginRight: 5 / proporcional}}>
                         <select
-                            style={{width: 394 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{width: 394 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                                     cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
                             className='form-select fira-fans-sans-serif border-0'
                             onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
@@ -129,12 +129,12 @@ export default function ListaProductos({proporcional}) {
                 </div>
             </div>
             
-            <div style={{width: 1220 / proporcional, minHeight: 480 / proporcional}}>
+            <div style={{width: '100%', minHeight: 480 / proporcional}}>
                 {
                     lista_productos && lista_productos.length > 0 ? (
                         lista_productos.map ((producto, numprov) => {
                             return (
-                                <div key={numprov} className='d-flex' 
+                                <div key={numprov} className='d-flex justify-content-between' 
                                     style={{marginBottom: 12.5 / proporcional}}>
                                     {
                                         productos[(3 *  numprov)] ? ( 
