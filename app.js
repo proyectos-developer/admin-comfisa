@@ -16,7 +16,7 @@ app.use(cors())
 require ('./backend/lib/passport.js')
 
 /**Configuraciones */
-app.set ('port', process.env.PORT || 3002);
+app.set ('port', process.env.PORT || 3001);
 app.set('views', path.join(__dirname, 'views')); 
 app.engine('.hbs', exphbs.engine({
     defaultLayout: 'main',
