@@ -61,7 +61,7 @@ export default function NuevoProveedor({proporcional}) {
     }
 
     const guardar_proveedor = () => {
-        if (foto_logo === '' || nombre_proveedor === '' || descripcion === ''){
+        if (foto_logo === '' || nombre_proveedor === ''){
             setEFotoLogo(foto_logo === '' ? true : false)
             setENombreProveedor(nombre_proveedor === '' ? true : false)
             setEDescripcion(edescripcion === '' ? true : false)
