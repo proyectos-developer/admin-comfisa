@@ -257,7 +257,7 @@ export default function DetallesProducto({proporcional}) {
                         style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
                         <select
                             disabled={!editar}
-                            style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                            style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional}}
                             className='form-select border-0 '
                             onChange={(event) => buscar_datos_proveeodor (event.target.value)}
                             id='id_proveedor'>
@@ -279,7 +279,7 @@ export default function DetallesProducto({proporcional}) {
                                 style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
                                 <select
                                     disabled={!editar}
-                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional}}
                                     className='form-select border-0 '
                                     onChange={(event) => buscar_datos_tipo_proucto(event.target.value)}
                                     id='id_tipo_producto'>
@@ -321,7 +321,7 @@ export default function DetallesProducto({proporcional}) {
                             !nueva_medida ? (
                                 <select
                                     disabled={!editar}
-                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional}}
                                     className='form-select border-0 '
                                     onChange={(event) => seleccion_medida_tipo_producto (event.target.value)}
                                     id='id_medida_producto'>
@@ -339,7 +339,7 @@ export default function DetallesProducto({proporcional}) {
                                 </select>
                             ) : (
                                 <div className='d-flex shadow-sm bg-white rounded' 
-                                    style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                                    style={{width: '100%', height: 48 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
                                     <input
                                         disabled={!editar}
                                         type='default'
@@ -369,7 +369,7 @@ export default function DetallesProducto({proporcional}) {
                         </p>
                         <input type='text'
                             disabled={!editar}
-                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                             className='form-control border-0 '
                             value={nombre_producto}
                             onChange={(event) => {setNombreProducto(event.target.value)}}
@@ -377,7 +377,7 @@ export default function DetallesProducto({proporcional}) {
                             placeholder='E.j. Lija'/>
                     </div>
                     <div style={{width: '100%', height: 110 / proporcional}}>
-                        <div className='shadow-sm bg-white rounded' style={{width: '100%', height: 110 / proporcional, 
+                        <div className='shadow-sm bg-white rounded' style={{width: '100%', height: 96 / proporcional, 
                                                 border: edescripcion ? '1px solid red' : '1px solid #B2DFDB', 
                                                 borderRadius: 4 / proporcional}}>
                             <textarea
@@ -386,7 +386,7 @@ export default function DetallesProducto({proporcional}) {
                                 rows={3}
                                 id='descripcion'
                                 aria-label='descripcion'
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${16 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, lineHeight: `${16 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 placeholder='Descripción del proveedor (*)'
                                 onChange={(event) => {setDescripcion(event.target.value); setCountDescripcion(descripcion.length - 1);}}
@@ -459,7 +459,7 @@ export default function DetallesProducto({proporcional}) {
                                                         borderRadius: 4 / proporcional}}>
                             <textarea
                                 disabled={!editar} 
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 98 / proporcional, fontSize: 16 / proporcional, 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, 
                                         lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 cols={2}
                                 className='form-control border-0 '
@@ -479,7 +479,7 @@ export default function DetallesProducto({proporcional}) {
                                                         borderRadius: 4 / proporcional}}>
                             <textarea
                                 disabled={!editar} 
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                         }}
                                 cols={2}
                                 className='form-control border-0 '
@@ -501,7 +501,7 @@ export default function DetallesProducto({proporcional}) {
                                                         borderRadius: 4 / proporcional}}>
                             <textarea
                                 disabled={!editar} 
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, 
                                         lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 cols={2}
                                 className='form-control border-0 '
@@ -521,7 +521,7 @@ export default function DetallesProducto({proporcional}) {
                                                         borderRadius: 4 / proporcional}}>
                             <textarea
                                 disabled={!editar} 
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                         }}
                                 cols={2}
                                 className='form-control border-0 '
@@ -543,7 +543,7 @@ export default function DetallesProducto({proporcional}) {
                                                         borderRadius: 4 / proporcional}}>
                             <textarea
                                 disabled={!editar} 
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 94 / proporcional, fontSize: 16 / proporcional, 
                                         lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 cols={2}
                                 className='form-control border-0 '
@@ -577,7 +577,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_uno}
                                 onChange={(event) => {setFotoUno(event.target.value)}}
@@ -603,7 +603,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_dos}
                                 onChange={(event) => {setFotoDos(event.target.value)}}
@@ -629,7 +629,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_tres}
                                 onChange={(event) => {setFotoTres(event.target.value)}}
@@ -655,7 +655,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_cuatro}
                                 onChange={(event) => {setFotoCuatro(event.target.value)}}
@@ -683,7 +683,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_cinco}
                                 onChange={(event) => {setFotoCinco(event.target.value)}}
@@ -709,7 +709,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_seis}
                                 onChange={(event) => {setFotoSeis(event.target.value)}}
@@ -735,7 +735,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_siete}
                                 onChange={(event) => {setFotoSiete(event.target.value)}}
@@ -761,7 +761,7 @@ export default function DetallesProducto({proporcional}) {
                             style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                             <input type='url'
                                 disabled={!editar}
-                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 value={foto_ocho}
                                 onChange={(event) => {setFotoOcho(event.target.value)}}
@@ -790,7 +790,7 @@ export default function DetallesProducto({proporcional}) {
                                 style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                                 <input type='url'
                                     disabled={!editar}
-                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                     className='form-control border-0 '
                                     value={foto_nueve}
                                     onChange={(event) => {setFotoNueve(event.target.value)}}
@@ -816,7 +816,7 @@ export default function DetallesProducto({proporcional}) {
                                 style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                                 <input type='url'
                                     disabled={!editar}
-                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                                     className='form-control border-0 '
                                     value={foto_diez}
                                     onChange={(event) => {setFotoDiez(event.target.value)}}

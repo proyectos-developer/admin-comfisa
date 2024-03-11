@@ -89,18 +89,18 @@ export default function ListaProductos({proporcional}) {
 
     return ( 
         <div className='position-relative' style={{width: '100%', paddingLeft: 350 / proporcional, paddingRight: 350 / proporcional}}>
-            <div className='d-flex' style={{width: 1220 / proporcional, height: 50 / proporcional, marginBottom: 25 / proporcional }}>
-                <div className='d-flex' style={{width: 1220 / proporcional, height: 50 / proporcional}}>
+            <div className='d-flex' style={{width: '100%', height: 50 / proporcional, marginBottom: 25 / proporcional }}>
+                <div className='d-flex justify-content-between' style={{width: '100%', height: 50 / proporcional}}>
                     <p className='mb-0' 
-                        style={{width: 396 / proporcional, fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, fontWeight: 400, color: '#212121', 
+                        style={{width: '32%', fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, fontWeight: 400, color: '#212121', 
                                 marginRight: 10 / proporcional, fontFamily: `'Lora', serif`}}>
                         TUS PRODUCTOS:
                     </p>
                     <div className='shadow-sm bg-white rounded' 
-                        style={{width: 396 / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional,
+                        style={{width: '32%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional,
                                 marginLeft: 5 / proporcional, marginRight: 5 / proporcional}}>
                         <select
-                            style={{width: 394 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
+                            style={{width: '100%', height: 48 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                                     cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
                             className='form-select fira-fans-sans-serif border-0'
                             onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
@@ -113,18 +113,20 @@ export default function ListaProductos({proporcional}) {
                         </select>
                     </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 396 / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginLeft: 10 / proporcional,
+                        style={{width: '32%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginLeft: 10 / proporcional,
                                 marginLeft: 10 / proporcional}}>
                         <input
-                            style={{width: 348 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{width: '80%', height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                    fontFamily: 'Mukta, sans-serif'}}
                             className='form-control fira-fans-sans-serif border-0'
                             onChange={(event) => setBuscarProducto (event.target.value)}
                             value={buscar_producto}
                             placeholder='Buscar producto'
                         />
-                        <img src={icono_search} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 12 / proporcional, cursor: 'pointer'}}
-                            onClick={() => buscar_producto_por()}/> 
+                        <div className='d-flex justify-content-between' style={{width: '20%', height: 24 / proporcional}}>
+                            <img src={icono_search} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 12 / proporcional, cursor: 'pointer'}}
+                                onClick={() => buscar_producto_por()}/>
+                        </div>
                     </div>
                 </div>
             </div>

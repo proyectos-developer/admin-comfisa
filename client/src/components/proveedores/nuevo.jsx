@@ -82,23 +82,25 @@ export default function NuevoProveedor({proporcional}) {
     return (
         <div className='position-relative' 
             style={{width: '100%', paddingLeft: 500 / proporcional, paddingRight: 500 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
-            <div className='d-flex' style={{width: 920 / proporcional, height: 278 / proporcional, marginBottom: 50 / proporcional}}>
-                <div style={{width: 372 / proporcional, height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
+            <div className='d-flex justify-content-between' style={{wwidth: '100%', height: 278 / proporcional, marginBottom: 50 / proporcional}}>
+                <div style={{width: '39%', height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
                     {
                         foto_logo === '' ? ( 
-                            <div className='position-relative' 
-                                style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
-                                <div style={{width: 370 / proporcional, height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                <div id='imagen' className='position-absolute' type='button' onClick={() => handle_editar_picture()}
-                                    style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-proveedor' onChange={(event) => handle_image_change(event)} />
+                            <div className='' 
+                                style={{width: '100%', height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                <div style={{width: '100%', height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
+                                <div className='position-relative' style={{width: '100%', height: 48 / proporcional}}>
+                                    <div id='imagen' className='position-absolute start-50 translate-middle' type='button' onClick={() => handle_editar_picture()}
+                                        style={{ left: 150.5 / proporcional, bottom: 24 / proporcional, width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{wtdth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-proveedor' onChange={(event) => handle_image_change(event)} />
+                                    </div>
                                 </div>
                             </div>
                         ) : (
-                            <div className='position-relative' 
-                                style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                            <div className='' 
+                                style={{width: '100%', height: 278 / proporcional, marginRight: 25 / proporcional}}>
                                 <AvatarEditor
                                     width={370 / proporcional}
                                     height={278 / proporcional}
@@ -107,26 +109,28 @@ export default function NuevoProveedor({proporcional}) {
                                     borderRadius={parseFloat(4)}
                                     scale={1.0}
                                     ref={(editor) => set_editor_ref(editor)}/>
-                                <div id='imagen' className='position-absolute' type='button' onClick={() => handle_editar_picture()}
-                                    style={{bottom: -24 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-proveedor' onChange={(event) => handle_image_change(event)} />
+                                <div className='position-relative' style={{width: '100%', height: 48 / proporcional}}>
+                                    <div id='imagen' className='position-absolute start-50 translate-middle' type='button' onClick={() => handle_editar_picture()}
+                                        style={{ left: 150.5 / proporcional, bottom: 24 / proporcional, width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
+                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
+                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
+                                            id='foto-proveedor' onChange={(event) => handle_image_change(event)} />
+                                    </div>
                                 </div>
                             </div>
                         )
                     }
                 </div>
-                <div style={{width: 500 / proporcional, height: 50 / proporcional, marginLeft: 25 / proporcional}}>
+                <div style={{width: '49%', height: 50 / proporcional, marginLeft: 25 / proporcional}}>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 500 / proporcional, height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
+                        style={{width: '100%', height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
                                                     borderRadius: 4 / proporcional, marginBottom: 5 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Nombre proveedor (*):
                         </p>
                         <input type='text'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 290 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={nombre_proveedor}
@@ -134,35 +138,35 @@ export default function NuevoProveedor({proporcional}) {
                             id='nombre_proveedor'
                             placeholder='E.j. Norton'/>
                     </div>
-                    <div style={{width: 500 / proporcional, height: 168 / proporcional, marginBottom: 5 / proporcional}}>
-                        <div className='shadow-sm bg-white rounded' style={{width: 500 / proporcional, height: 150 / proporcional, border: '1px solid #B2DFDB', 
+                    <div style={{width: '100%', height: 168 / proporcional, marginBottom: 5 / proporcional}}>
+                        <div className='shadow-sm bg-white rounded' style={{width: '100%', height: 150 / proporcional, border: '1px solid #B2DFDB', 
                                                 borderRadius: 4 / proporcional}}>
                             <textarea
                                 type='text'
                                 rows={3}
                                 id='descripcion'
                                 aria-label='descripcion'
-                                style={{fontFamily: 'Mukta, sans-serif', width: 498 / proporcional, height: 148 / proporcional, fontSize: 18 / proporcional, lineHeight: `${18 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 146 / proporcional, fontSize: 18 / proporcional, lineHeight: `${18 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 placeholder='Descripción del proveedor (*)'
                                 onChange={(event) => {setDescripcion(event.target.value); setCountDescripcion(descripcion.length - 1);}}
                                 value={descripcion.slice(0, 500)}
                                 />
                         </div>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 500 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
                                     lineHeight: `${18 / proporcional}px`, color: count_descripcion >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
                             {500 - count_descripcion}
                         </p>
                     </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 500 / proporcional, height: 50 / proporcional, border: ecorreo ? '1px solid red' : '1px solid #B2DFDB', 
+                        style={{width: '100%', height: 50 / proporcional, border: ecorreo ? '1px solid red' : '1px solid #B2DFDB', 
                                                     borderRadius: 4 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Correo electrónico:
                         </p>
                         <input type='text'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 290 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={correo}
@@ -172,17 +176,17 @@ export default function NuevoProveedor({proporcional}) {
                     </div>
                 </div>
             </div>
-            <div style={{with: 920 / proporcional, height: 50 / proporcional}}>
-                <div className='d-flex' style={{with: 920 / proporcional, height: 50 / proporcional, marginBottom: 20 / proporcional}}>
+            <div style={{with: '100%', height: 50 / proporcional}}>
+                <div className='d-flex' style={{with: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 450 / proporcional, height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
+                        style={{width: '49%', height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
                                                     borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Número de teléfono:
                         </p>
                         <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 250 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={nro_telefono}
@@ -191,14 +195,14 @@ export default function NuevoProveedor({proporcional}) {
                             placeholder='E.j. Norton'/>
                     </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 450 / proporcional, height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
+                        style={{width: '49%', height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
                                                     borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Número de R.U.C.:
                         </p>
                         <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 250 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={nro_ruc}
@@ -207,16 +211,16 @@ export default function NuevoProveedor({proporcional}) {
                             placeholder='E.j. 968xxxxxx'/>
                     </div>
                 </div>
-                <div className='' style={{with: 920 / proporcional, height: 50 / proporcional}}>
+                <div className='' style={{with: '100%', height: 50 / proporcional}}>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 920 / proporcional, height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
+                        style={{width: '100%', height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
                                                     borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '20%', height: 48 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Dirección:
                         </p>
                         <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 710 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '80%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={direccion}
