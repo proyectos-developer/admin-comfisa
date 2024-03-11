@@ -76,8 +76,8 @@ function App() {
                                                       <HomeDashboard proporcional={1920 / width} />}/>
 
                   <Route path='proveedores' element={width < 500 ? <ProveedoresPanelCell proporcional={499 / width}/> : 
-                                                      width < 991 ? <ProveedoresPanelTablet proporcional={991 / width}/> : 
-                                                                    <ProveedoresPanel proporcional={1920 / width} />}>
+                                                     width < 991 ? <ProveedoresPanelTablet proporcional={991 / width}/> : 
+                                                                   <ProveedoresPanel proporcional={1920 / width} />}>
                         <Route index element={width < 500 ? <ListaProveedoresCell proporcional={499 / width}/> : 
                                               width < 991 ? <ListaProveedoresTablet proporcional={991 / width}/> : 
                                                             <ListaProveedores proporcional={1920 / width} />}/>
