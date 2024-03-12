@@ -143,7 +143,7 @@ router.get ('/api/cotizaciones/usuario/:shop_id', async (req, res) => {
         const total = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
         const usuario = cotizaciones[0].usuario
         console.log ('usuario', usuario)
-        const cliente = await pool.query ('SELECT * FROM clientes WHERE usuario = ?', [usuario])
+        const cliente = await pool.query ('SELECT * FROM info_clientes WHERE usuario = ?', [usuario])
         
         return res.json ({
             cotizaciones: cotizaciones[0],
