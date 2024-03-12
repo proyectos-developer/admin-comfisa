@@ -27,11 +27,10 @@ router.get ('/api/cotizaciones/shop_id/:shop_id/estado/:estado/:begin/:amount', 
     try {
         if (estado === '0' && shop_id === '0'){
             if (parseInt(begin) === 0){
-                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion ORDER BY created_at DESC LIMIT ${begin},${amount}`)
-                const total_cotizaciones = await pool.query ('SELECT COUNT (id) FROM carrito_cotizacion')
+                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion GROUP BY shop_id ORDER BY created_at DESC LIMIT ${begin},${amount}`)
                 return res.json ({
                     cotizaciones: cotizaciones,
-                    total_cotizaciones: total_cotizaciones [0][`COUNT (id)`],
+                    total_cotizaciones: cotizaciones.length,
                     success: true
                 })
             }else{
@@ -43,11 +42,10 @@ router.get ('/api/cotizaciones/shop_id/:shop_id/estado/:estado/:begin/:amount', 
             }
         }else if (estado === '0' && shop_id !== '0'){
             if (parseInt(begin) === 0){
-                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE shop_id = ? ORDER BY created_at DESC LIMIT ${begin},${amount}`, [shop_id])
-                const total_cotizaciones = await pool.query ('SELECT COUNT (id) FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
+                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE shop_id = ? GROUP BY shop_id ORDER BY created_at DESC LIMIT ${begin},${amount}`, [shop_id])
                 return res.json ({
                     cotizaciones: cotizaciones,
-                    total_cotizaciones: total_cotizaciones [0][`COUNT (id)`],
+                    total_cotizaciones: cotizaciones.length,
                     success: true
                 })
             }else{
@@ -59,11 +57,10 @@ router.get ('/api/cotizaciones/shop_id/:shop_id/estado/:estado/:begin/:amount', 
             }
         }else if (estado !== '0' && shop_id === '0'){
             if (parseInt(begin) === 0){
-                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE estado = ? ORDER BY created_at DESC LIMIT ${begin},${amount}`, [estado])
-                const total_cotizaciones = await pool.query ('SELECT COUNT (id) FROM carrito_cotizacion WHERE estado = ?', [estado])
+                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE estado = ? GROUP BY shop_id ORDER BY created_at DESC LIMIT ${begin},${amount}`, [estado])
                 return res.json ({
                     cotizaciones: cotizaciones,
-                    total_cotizaciones: total_cotizaciones [0][`COUNT (id)`],
+                    total_cotizaciones: cotizaciones.length,
                     success: true
                 })
             }else{
@@ -75,11 +72,10 @@ router.get ('/api/cotizaciones/shop_id/:shop_id/estado/:estado/:begin/:amount', 
             }
         }else if (estado !== 0 && shop_id !== '0'){
             if (parseInt(begin) === 0){
-                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE estado = ? AND shop_id = ? ORDER BY created_at DESC LIMIT ${begin},${amount}`, [estado, shop_id])
-                const total_cotizaciones = await pool.query ('SELECT COUNT (id) FROM carrito_cotizacion WHERE estado = ? AND shop_id = ?', [estado, shop_id])
+                const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion WHERE estado = ? AND shop_id = ? GROUP BY shop_id ORDER BY created_at DESC LIMIT ${begin},${amount}`, [estado, shop_id])
                 return res.json ({
                     cotizaciones: cotizaciones,
-                    total_cotizaciones: total_cotizaciones [0][`COUNT (id)`],
+                    total_cotizaciones: cotizaciones.length,
                     success: true
                 })
             }else{

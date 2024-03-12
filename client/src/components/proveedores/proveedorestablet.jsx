@@ -123,7 +123,7 @@ export default function ListaProveedoresTablet({proporcional}) {
                             value={buscar_proveedor}
                             placeholder='Buscar proveedor'
                         />
-                        <div className='d-flex justify-content-center' style={{width: '20%', height: '100%' / proporcional}}>
+                        <div className='d-flex justify-content-center' style={{width: '20%', height: '100%'}}>
                             <img src={icono_search} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 12 / proporcional, cursor: 'pointer'}}
                                 onClick={() => buscar_proveedor_por()}/> 
                         </div>

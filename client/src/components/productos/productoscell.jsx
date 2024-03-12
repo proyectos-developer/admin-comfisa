@@ -95,7 +95,7 @@ export default function ListaProductosCell({proporcional}) {
                         style={{width: 457 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                 cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
                         className='form-select fira-fans-sans-serif border-0'
-                        onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
+                        onChange={(event) => seleccionar_ordenar_por(event.target.value)}
                     >
                         <option value='0'>Ordenar por:</option>
                         <option value='proveedor-ASC'>Nombre proveedor A-Z</option>

@@ -31,7 +31,7 @@ export default function ListaCotizacionesCell({proporcional}) {
                     style={{width: '100%', height: 48 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
                             cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
                     className='form-select fira-fans-sans-serif border-0'
-                    onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
+                    onChange={(event) => seleccionar_ordenar_por(event.target.value)}
                 >
                     <option value='0'>Ordenar por:</option>
                     <option value='producto-ASC'>Nombre producto A-Z</option>

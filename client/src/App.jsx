@@ -123,8 +123,9 @@ function App() {
                   </Route>
                   
                   <Route path='cotizaciones' element={width < 500 ? <CotizacionesPanelCell proporcional={499 / width}/> : 
-                                                              width < 991 ? <CotizacionesPanelTablet proporcional={991 / width}/> : 
-                                                                            <CotizacionesPanel proporcional={1920 / width} />}>
+                                                      width < 991 ? <CotizacionesPanelTablet proporcional={991 / width}/> : 
+                                                                    <CotizacionesPanel proporcional={1920 / width} />}>
+
                         <Route index element={width < 500 ? <ListaCotizacionesCell proporcional={499 / width}/> : 
                                               width < 991 ? <ListaCotizacionesTablet proporcional={991 / width}/> : 
                                                             <ListaCotizaciones proporcional={1920 / width} />}/>

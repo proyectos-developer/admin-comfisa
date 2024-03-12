@@ -10,6 +10,7 @@ import filtrosreducer from './redux/reducers/filtrosreducer'
 import begindata from './redux/slice/begindata'
 import proveedoresdata from './redux/slice/proveedoresdata.js'
 import productosdata from './redux/slice/productosdata'
+import cotizacionesdata from './redux/slice/cotizacionesdata'
 
 const store = configureStore({
     reducer: ({
@@ -18,6 +19,7 @@ const store = configureStore({
       begin: begindata,
       proveedores: proveedoresdata,
       productos: productosdata,
+      cotizaciones: cotizacionesdata
     }),
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
          immutableCheck: false,

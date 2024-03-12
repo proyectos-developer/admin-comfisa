@@ -130,7 +130,7 @@ export default function ListaProveedores({proporcional}) {
                 </div>
             </div>
             
-            <div style={{width: '100%' / proporcional, minHeight: 480 / proporcional}}>
+            <div style={{width: '100%', minHeight: 480 / proporcional}}>
                 {
                     lista_proveedores && lista_proveedores.length > 0 ? (
                         lista_proveedores.map ((proveedor, numprov) => {
