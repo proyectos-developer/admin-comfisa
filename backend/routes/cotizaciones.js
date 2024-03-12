@@ -98,7 +98,8 @@ router.get ('/api/cotizaciones/shop_id/:shop_id/estado/:estado/:begin/:amount', 
 router.get ('/api/cotizacion/:shop_id', async (req, res) => {
     const {shop_id} = req.params
     try {
-        const cotizaciones = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
+        const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion JOIN productos_proveedor ON carrito_cotizacion.id_producto = productos_proveedor.id JOIN proveedores ON
+            proveedores.id = productos_proveedor.id_proveedor WHERE shop_id = ?`, [shop_id])
 
         return res.json ({
             cotizaciones: cotizaciones,
@@ -142,7 +143,6 @@ router.get ('/api/cotizaciones/usuario/:shop_id', async (req, res) => {
         const cotizaciones = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ? GROUP BY shop_id', [shop_id])
         const total = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
         const usuario = cotizaciones[0].usuario
-        console.log ('usuario', usuario)
         const cliente = await pool.query ('SELECT * FROM info_clientes WHERE usuario = ?', [usuario])
         
         return res.json ({
