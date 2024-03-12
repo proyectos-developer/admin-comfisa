@@ -141,7 +141,7 @@ router.get ('/api/cotizaciones/usuario/:shop_id', async (req, res) => {
     try {
         const cotizaciones = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ? GROUP BY shop_id', [shop_id])
         const total = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
-        const usuario = cotizaciones[0].usuario + cotizaciones[0].nro_telefono
+        const usuario = cotizaciones[0].usuario
         console.log ('usuario', usuario)
         const cliente = await pool.query ('SELECT * FROM clientes WHERE usuario = ?', [usuario])
         
