@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import axios from 'axios'
+import { constantes } from '../../../uri/constantes'
 
 export default function CardCotizacion({cotizacion, index, proporcional}) {
 
@@ -10,7 +11,12 @@ export default function CardCotizacion({cotizacion, index, proporcional}) {
     const [button, setButton] = useState (false)
 
     useEffect(() => {
-        axios.get ('')
+        axios.get (`${constantes().url_principal[0].url}/cotizaciones/usuario/${cotizacion.shop_id}`)
+            .then ((res) => {
+                console.log (res)
+            }).catch ((error) => {
+                cconsole.log (error)
+            })
     }, [])
 
     return (
