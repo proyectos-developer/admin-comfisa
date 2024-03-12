@@ -95,7 +95,7 @@ router.get('/api/productos/buscar/:search/order/:order_by/:order', async (req, r
     try {
         if (search === '0' && order_by === '0'){
             const productos = await pool.query ('SELECT * FROM productos_proveedor')
-            res.json({
+            return res.json({
                 productos: productos,
                 success: true
             })
@@ -103,7 +103,7 @@ router.get('/api/productos/buscar/:search/order/:order_by/:order', async (req, r
             const productos = await pool.query (`SELECT * FROM productos_proveedor JOIN proveedores ON proveedores.id = productos_proveedor.id_proveedor
                                                  WHERE productos_proveedor.producto LIKE '%${search}%' OR productos_proveedor.descripcion 
                                                 LIKE '%${search}%' OR proveedores.proveedor LIKE '%${search}%'`)
-            res.json({
+            return res.json({
                 productos: productos,
                 success: true
             })
@@ -111,19 +111,19 @@ router.get('/api/productos/buscar/:search/order/:order_by/:order', async (req, r
             const productos = await pool.query (`SELECT * FROM productos_proveedor JOIN proveedores ON proveedores.id = productos_proveedor.id_proveedor
                                                 WHERE productos_proveedor.producto LIKE '%${search}%' OR productos_proveedor.descripcion 
                                                 LIKE '%${search}%' OR proveedores.proveedor LIKE '%${search}%' ORDER BY ${order_by} ${order}`)
-            res.json({
+            return res.json({
                 productos: productos,
                 success: true
             })
         }else if (search === '0' && order_by !== '0'){
             const productos = await pool.query (`SELECT * FROM productos_proveedor ORDER BY ${order_by} ${order}`)
-            res.json({
+            return res.json({
                 productos: productos,
                 success: true
             })
         }
     } catch (error) {
-        res.json({
+        return res.json({
             productos: [],
             success: false
         })

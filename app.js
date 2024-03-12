@@ -59,6 +59,7 @@ app.use(require('./backend/routes/authentication.js'))
 
 app.use(require('./backend/routes/proveedores.js'))
 app.use(require('./backend/routes/productos.js'))
+app.use(require('./backend/routes/cotizaciones.js'))
 
 app.use(express.static(path.resolve(__dirname, './backend/views')));
 app.get ('/api', (req, res) => {
@@ -95,6 +96,14 @@ app.get('/home/productos/nuevo-producto', (req, res) => {
 });
 
 app.get('/home/productos/detalles-producto/:id_producto', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
+});
+
+app.get('/home/cotizaciones', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
+});
+
+app.get('/home/cotizaciones/detalles/:id_cotizacion', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
 });
 
