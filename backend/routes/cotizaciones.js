@@ -135,4 +135,29 @@ router.post ('/api/cotizacion/observaciones/:shop_id/:id_producto', async (req, 
     }
 })
 
+router.get ('/api/cotizaciones/usuario/:shop_id', async (req, res) => {
+    const {shop_id} = req.params
+
+    try {
+        const cotizaciones = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ? GROUP BY shop_id', [shop_id])
+        const total = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
+        console.log (cotizaciones[0])
+        const usuario = cotizaciones[0].usuario
+        const cliente = await pool.query ('SELECT * FROM clientes WHERE usuario = ?', [usuario])
+        
+        return res.json ({
+            cotizaciones: cotizaciones[0],
+            total_productos: total.length,
+            cliente: cliente[0],
+            success: true
+        })
+    } catch (error) {
+        console.log (error)
+        return res.json ({
+            error: error,
+            success: false
+        })
+    }
+})
+
 module.exports = router

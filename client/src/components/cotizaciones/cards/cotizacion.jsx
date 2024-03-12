@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import axios from 'axios'
+
 export default function CardCotizacion({cotizacion, index, proporcional}) {
-    console.log ('cotizacion', cotizacion)
 
     const navigate = useNavigate()
 
     const [button, setButton] = useState (false)
+
+    useEffect(() => {
+        axios.get ('')
+    }, [])
 
     return (
         <div key={index} className='d-flex shadow rounded' style={{width: '32%', height: '100%', padding: 10 / proporcional}}>
