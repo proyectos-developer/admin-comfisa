@@ -21,45 +21,55 @@ export default function NuevoProductoTablet({proporcional}) {
     const dispatch = useDispatch()
 
     const [lista_proveedores, setListaProveedores] = useState([])
+    const [lista_tipo_productos, setListaTipoProductos] = useState([])
+    const [lista_medidas, setListaMedidas] = useState([])
+
     const [proveedor, setProveedor] = useState ('')
     const [id_proveedor, setIdProveedor] = useState('')
+    const [tipo_producto, setTipoProducto] = useState ('')
+    const [id_tipo_producto, setIdTipoProducto] = useState('')
+    const [medida, setMedida] = useState ('')
+    const [id_medida, setIdMedida] = useState('')
 
     const [foto_uno, setFotoUno] = useState('')
     const [foto_dos, setFotoDos] = useState('')
     const [foto_tres, setFotoTres] = useState('')
     const [foto_cuatro, setFotoCuatro] = useState('')
     const [foto_cinco, setFotoCinco] = useState('')
+    const [foto_seis, setFotoSeis] = useState('')
+    const [foto_siete, setFotoSiete] = useState('')
+    const [foto_ocho, setFotoOcho] = useState('')
+    const [foto_nueve, setFotoNueve] = useState('')
+    const [foto_diez, setFotoDiez] = useState('')
     const [nombre_producto, setNombreProducto] = useState('')
     const [descripcion, setDescripcion] = useState('')
-    const [caracteristicas_uno, setCaracteristicasUno] = useState('')
-    const [caracteristicas_dos, setCaracteristicasDos] = useState('')
-    const [caracteristicas_tres, setCaracteristicasTres] = useState('')
-    const [caracteristicas_cuatro, setCaracteristicasCuatro] = useState('')
-    const [caracteristicas_cinco, setCaracteristicasCinco] = useState('')
-    const [count_descripcion, setCountDescripcion] = useState(500)
-    const [count_caracteristica_uno, setCountCaracteristicaUno] = useState(500)
-    const [count_caracteristica_dos, setCountCaracteristicaDos] = useState(500)
-    const [count_caracteristica_tres, setCountCaracteristicaTres] = useState(500)
-    const [count_caracteristica_cuatro, setCountCaracteristicaCuatro] = useState(500)
-    const [count_caracteristica_cinco, setCountCaracteristicaCinco] = useState(500)
+    const [caracteristicas_uno, setCaracteristicaUno] = useState('')
+    const [caracteristicas_dos, setCaracteristicaDos] = useState('')
+    const [caracteristicas_tres, setCaracteristicaTres] = useState('')
+    const [caracteristicas_cuatro, setCaracteristicaCuatro] = useState('')
+    const [caracteristicas_cinco, setCaracteristicaCinco] = useState('')
+    const [count_descripcion, setCountDescripcion] = useState(250)
+    const [count_caracteristica_uno, setCountCaracteristicaUno] = useState(250)
+    const [count_caracteristica_dos, setCountCaracteristicaDos] = useState(250)
+    const [count_caracteristica_tres, setCountCaracteristicaTres] = useState(250)
+    const [count_caracteristica_cuatro, setCountCaracteristicaCuatro] = useState(250)
+    const [count_caracteristica_cinco, setCountCaracteristicaCinco] = useState(250)
     const [cantidad, setCantidad] = useState('')
-    const [medida, setMedida] = useState(true)
+    const [unidad, setUnidad] = useState('')
     const [mostrar, setMostrar] = useState(true)
+
+    const [otro_producto, setOtroProducto] = useState (false)
+    const [nuevo_tipo_producto, setNuevoTipoProducto] = useState (false)
+    const [nueva_medida, setNuevaMedida] = useState (false)
     
     const [efoto_uno, setEFotoUno] = useState('')
     const [enombre_producto, setENombreProveedor] = useState('')
     const [edescripcion, setEDescripcion] = useState('')
-    const [ecantidad, setECantidad] = useState('')
 
     const {new_producto} = useSelector(({productos}) => productos)
     const {get_proveedores} = useSelector(({proveedores}) => proveedores)
+    const {get_tipo_productos_proveedor, new_tipo_producto, get_medidas_tipo, new_medida} = useSelector(({productos}) => productos)
     const {open_menu_derecho} = useSelector(({data}) => data)
-
-    let dataeditoruno = null
-    let dataeditordos = null
-    let dataeditortres = null
-    let dataeditorcuatro = null
-    let dataeditorcinco = null
 
     useEffect (() => {
         dispatch(proveedoresdata(proveedoresConstants(0, 0, 0, 0, {}, false).get_proveedores))
@@ -67,98 +77,154 @@ export default function NuevoProductoTablet({proporcional}) {
 
     useEffect (() => {
         if (get_proveedores && get_proveedores.success === true && get_proveedores.proveedores){
+            console.log (get_proveedores)
             setListaProveedores(get_proveedores.proveedores)
         }
     }, [get_proveedores])
 
     useEffect (() => {
+        if (get_tipo_productos_proveedor && get_tipo_productos_proveedor.success === true && get_tipo_productos_proveedor.tipo_productos){
+            setListaTipoProductos(get_tipo_productos_proveedor.tipo_productos)
+        }
+    }, [get_tipo_productos_proveedor])
+
+    const buscar_datos_proveeodr = (value) => {
+        setIdProveedor(value.split('-')[0]) 
+        setProveedor(value.split('-')[1])
+        dispatch (productosdata(productosConstants(value.split('-')[0], 0, 0, 0, {}, false).get_tipo_productos_proveedor))
+    }
+
+    const buscar_datos_tipo_proucto = (value) => {
+        if (value !== '0' && value !== '00'){
+            setIdTipoProducto(value.split('-')[0])
+            setTipoProducto(value.split('-')[1])
+            setNombreProducto(value.split('-')[1])
+            dispatch(productosdata(productosConstants(value.split('-')[0], 0, 0, 0, {}, false).get_medidas_tipo))
+        }else if (value === '00'){
+            setNuevoTipoProducto(true)
+        }
+    }
+
+    const guardar_tipo_proucto = () => {
+        if (tipo_producto !== ''){
+            const new_data = {
+                id_proveedor: id_proveedor,
+                proveedor: proveedor,
+                nombre_tipo: tipo_producto
+            }
+            dispatch (productosdata(productosConstants (0, 0, 0, 0, new_data, false).new_tipo_producto))
+        }
+    }
+
+    const guardar_medida_tipo = () => {
+        if (medida !== ''){
+            const new_data = {
+                id_proveedor: id_proveedor,
+                proveedor: proveedor,
+                id_tipo: id_tipo_producto,
+                nombre_tipo: tipo_producto,
+                nombre_medida: medida
+            }
+            console.log (new_data)
+            dispatch (productosdata(productosConstants (0, 0, 0, 0, new_data, false).new_medida))
+        }
+    }
+
+    useEffect (() => {
+        if (new_tipo_producto && new_tipo_producto.success === true && new_tipo_producto.tipo_productos && new_tipo_producto.tipo_producto){
+            setTipoProducto(new_tipo_producto.tipo_producto.nombre_tipo)
+            setIdTipoProducto(new_tipo_producto.tipo_producto.id)
+            setNuevoTipoProducto(false)
+            setListaTipoProductos(new_tipo_producto.tipo_productos)
+            dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_tipo_producto))
+            setNombreProducto(new_tipo_producto.tipo_producto.nombre_tipo)
+            dispatch (productosdata(productosConstants(new_tipo_producto.tipo_producto.id, 0, 0, 0, {}, false).get_medidas_tipo))
+        }
+    }, [new_tipo_producto])
+
+    useEffect (() => {
+        if (new_medida && new_medida.success === true && new_medida.medidas && new_medida.medida){
+            setMedida(new_medida.medida.nombre_medida)
+            setIdMedida(new_medida.medida.id)
+            setNuevaMedida(false)
+            setListaMedidas(new_medida.medidas)
+            setNombreProducto(tipo_producto + ' ' + new_medida.medida.nombre_medida)
+            dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_medida))
+        }
+    }, [new_medida])
+
+    useEffect(() => {
+        if (get_medidas_tipo && get_medidas_tipo.success === true && get_medidas_tipo.medidas){
+            setListaMedidas(get_medidas_tipo.medidas)
+        }
+    }, [get_medidas_tipo])
+
+    useEffect (() => {
+        console.log (new_producto)
         if (new_producto && new_producto.success === true && new_producto.producto){
             dispatch(productosdata(productosConstants(0, 0, 0, 0, {}, true).new_producto))
-            navigate(`/home/productos/detalles-producto/${new_producto.producto.id}`)
+            if (otro_producto){
+                setIdProveedor('')
+                setProveedor('')
+                setIdTipoProducto('')
+                setTipoProducto('')
+                setIdMedida('')
+                setMedida('')
+                setNombreProducto('')
+                setDescripcion('')
+                setCaracteristicaUno('')
+                setCaracteristicaDos('')
+                setCaracteristicaTres('')
+                setCaracteristicaCuatro('')
+                setCaracteristicaCinco('')
+                setFotoUno('')
+                setFotoDos('')
+                setFotoTres('')
+                setFotoCuatro('')
+                setFotoCinco('')
+                setFotoSeis('')
+                setFotoSiete('')
+                setFotoOcho('')
+                setFotoNueve('')
+                setFotoDiez('')
+                setCantidad('')
+                setUnidad('')
+                setNuevoTipoProducto(false)
+                setNuevaMedida(false)
+                setMostrar(true)
+                navigate(`/home/productos/nuevo-producto`)
+                document.getElementById('id_proveedor').value = '0'
+                document.getElementById('id_tipo_producto').value = '0'
+                document.getElementById('id_medida_producto').value = '0'
+            }else{
+                navigate(`/home/productos/detalles-producto/${new_producto.producto.id}`)
+            }
         }
     }, [new_producto])
 
-    const set_editor_ref_uno = editor => {
-      dataeditoruno = editor
+    const seleccion_medida_tipo_producto = (value) => {
+        if (value !== '0' && value !== '00'){
+            setIdMedida(value.split('-')[0])
+            setMedida(value.split('-')[1])
+            setNombreProducto (tipo_producto + ' ' + value.split ('-')[1])
+        }else if (value === '00'){
+            setNuevaMedida(true)
+        }
     }
 
-    const set_editor_ref_dos = editor => {
-      dataeditordos = editor
-    }
-
-    const set_editor_ref_tres = editor => {
-      dataeditortres = editor
-    }
-
-    const set_editor_ref_cuatro = editor => {
-      dataeditorcuatro = editor
-    }
-
-    const set_editor_ref_cinco = editor => {
-      dataeditorcinco = editor
-    }
-
-    const handle_editar_picture_uno = (e) => {
-        const fileInput = document.getElementById('foto-producto-uno')
-        fileInput.click() 
-    }
-
-    const handle_editar_picture_dos = (e) => {
-        const fileInput = document.getElementById('foto-producto-dos')
-        fileInput.click() 
-    }
-
-    const handle_editar_picture_tres = (e) => {
-        const fileInput = document.getElementById('foto-producto-tres')
-        fileInput.click() 
-    }
-
-    const handle_editar_picture_cuatro = (e) => {
-        const fileInput = document.getElementById('foto-producto-cuatro')
-        fileInput.click() 
-    }
-
-    const handle_editar_picture_cinco = (e) => {
-        const fileInput = document.getElementById('foto-producto-cinco')
-        fileInput.click() 
-    }
-
-    const handle_image_change_uno = (e) => {
-        const image = e.target.files[0]
-        setFotoUno (image)
-    }
-
-    const handle_image_change_dos = (e) => {
-        const image = e.target.files[0]
-        setFotoDos (image)
-    }
-
-    const handle_image_change_tres = (e) => {
-        const image = e.target.files[0]
-        setFotoTres (image)
-    }
-
-    const handle_image_change_cuatro = (e) => {
-        const image = e.target.files[0]
-        setFotoCuatro (image)
-    }
-
-    const handle_image_change_cinco = (e) => {
-        const image = e.target.files[0]
-        setFotoCinco (image)
-    }
-
-    const guardar_producto = () => {
+    const guardar_producto = (otro) => {
         if (nombre_producto === ''){
-            setENombreProducto(nombre_producto === '' ? true : false)
+            setENombreProveedor(nombre_producto === '' ? true : false)
         }else{
+            setOtroProducto (otro)
             const nuevo_producto = {
                 id_proveedor: id_proveedor,
-                foto_uno: dataeditoruno === null ? '' : dataeditoruno.getImageScaledToCanvas().toDataURL(),
-                foto_dos: dataeditordos === null ? '' : dataeditordos.getImageScaledToCanvas().toDataURL(),
-                foto_tres: dataeditortres === null ? '' : dataeditortres.getImageScaledToCanvas().toDataURL(),
-                foto_cuatro: dataeditorcuatro === null ? '' : dataeditorcuatro.getImageScaledToCanvas().toDataURL(),
-                foto_cinco: dataeditorcinco === null ? '' : dataeditorcinco.getImageScaledToCanvas().toDataURL(),
+                proveedor: proveedor,
+                id_tipo: id_tipo_producto,
+                nombre_tipo: tipo_producto,
+                id_tipo_producto: id_tipo_producto,
+                medida: medida,
+                id_medida: id_medida,
                 producto: nombre_producto,
                 descripcion: descripcion,
                 caracteristica_uno: caracteristicas_uno,
@@ -166,9 +232,21 @@ export default function NuevoProductoTablet({proporcional}) {
                 caracteristica_tres: caracteristicas_tres,
                 caracteristica_cuatro: caracteristicas_cuatro,
                 caracteristica_cinco: caracteristicas_cinco,
+                foto_uno: foto_uno,                
+                foto_dos: foto_dos,
+                foto_tres: foto_tres,
+                foto_cuatro: foto_cuatro,
+                foto_cinco: foto_cinco,
+                foto_seis: foto_seis,
+                foto_siete: foto_siete,
+                foto_ocho: foto_ocho,
+                foto_nueve: foto_nueve,
+                foto_diez: foto_diez,
+                unidad: unidad,
                 cantidad: cantidad,
                 mostrar: true
             }
+            console.log (nuevo_producto)
             dispatch(productosdata(productosConstants(0, 0, 0, 0, nuevo_producto, false).new_producto))
         }
     }
@@ -176,83 +254,127 @@ export default function NuevoProductoTablet({proporcional}) {
     return (
         <div className='position-relative' 
             style={{width: '100%', paddingLeft: 60 / proporcional, paddingRight: 60 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
-            <div className='d-flex' style={{width: 871 / proporcional, height: 262 / proporcional, marginBottom: 50 / proporcional}}>
-                <div style={{width: 262 / proporcional, height: 262 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
+            <div className='d-flex justify-content-between' style={{width: '100%', height: 'auto', marginBottom: 20 / proporcional}}>
+                <div style={{width: '49%', height: 'auto'}}>
+                    <div className='d-flex shadow-sm bg-white rounded' 
+                        style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                        <select
+                            style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                            className='form-select border-0 '
+                            onChange={(event) => buscar_datos_proveeodr (event.target.value)}
+                            id='id_proveedor'>
+                            <option value='0'>{proveedor === '' ? 'Seleccionar proveedor' : proveedor}</option>
+                            {
+                                lista_proveedores && lista_proveedores.length > 0 ? (
+                                    lista_proveedores.map ((proveedor, index) => {
+                                        return (
+                                            <option key={index} value={proveedor.id + '-' + proveedor.proveedor}>{proveedor.proveedor}</option>
+                                        )
+                                    })
+                                ) : null
+                            }
+                        </select>
+                    </div>
                     {
-                        foto_uno === '' ? ( 
-                            <div className='position-relative' 
-                                style={{width: 260 / proporcional, height: 260 / proporcional, marginRight: 25 / proporcional}}>
-                                <div style={{width: 260 / proporcional, height: 260 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_uno()}
-                                    style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-producto-uno' onChange={(event) => handle_image_change_uno(event)} />
-                                </div>
+                        !nuevo_tipo_producto ? (
+                            <div className='d-flex shadow-sm bg-white rounded' 
+                                style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                                <select
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    className='form-select border-0 '
+                                    onChange={(event) => buscar_datos_tipo_proucto(event.target.value)}
+                                    id='id_tipo_producto'>
+                                    <option value='0'>{tipo_producto === '' ? 'Seleccionar tipo proucto' : tipo_producto}</option>
+                                    <option value='00'>Agregar nuevo</option>
+                                    {
+                                        lista_tipo_productos && lista_tipo_productos.length > 0 ? (
+                                            lista_tipo_productos.map ((tipo_producto, index) => {
+                                                return (
+                                                    <option key={index} value={tipo_producto.id + '-' + tipo_producto.nombre_tipo}>{tipo_producto.nombre_tipo}</option>
+                                                )
+                                            })
+                                        ) : null
+                                    }
+                                </select>
                             </div>
                         ) : (
-                            <div className='position-relative' 
-                                style={{width: 260 / proporcional, height: 260 / proporcional, marginRight: 25 / proporcional}}>
-                                <AvatarEditor
-                                    width={260 / proporcional}
-                                    height={260 / proporcional}
-                                    image={foto_uno}
-                                    color={[255, 255, 255, 0]}
-                                    borderRadius={parseFloat(4)}
-                                    scale={1.0}
-                                    ref={(editor) => set_editor_ref_uno(editor)}/>
-                                <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_uno()}
-                                    style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                    <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                    < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                        id='foto-producto-uno' onChange={(event) => handle_image_change_uno(event)} />
+                            <div className='d-flex shadow-sm bg-white rounded' 
+                                style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                                <input
+                                    type='default'
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '90%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    className='form-control border-0 '
+                                    onChange={(event) => setTipoProducto(event.target.value)}
+                                    value={tipo_producto}
+                                    placeholder='Tipo de producto: ej. Cortadora'
+                                    id='id_tipo_producto'/>
+                                <div className='d-flex justify-content-center' style={{width: '10%', height: 50 / proporcional}}>
+                                    <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 13 / proporcional, cursor: 'pointer'}}
+                                        onClick={() => guardar_tipo_proucto ()}/>
                                 </div>
                             </div>
                         )
                     }
-                </div>
-                <div style={{width: 561 / proporcional, height: 262 / proporcional, marginLeft: 25 / proporcional}}>
-                    <div className='d-flex justify-content-end' style={{width: 561 / proporcional, marginBottom: 5 / proporcional}}>
-                        <div className='d-flex shadow-sm bg-white rounded' 
-                            style={{width: 270.5   / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', marginRight: 5 / proporcional,
-                                                        borderRadius: 4 / proporcional, marginLeft: 5 / proporcional}}>
-                            <select
-                                style={{fontFamily: 'Mukta, sans-serif', width: 268.5 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                        }}
-                                className='form-select border-0 '
-                                onChange={(value) => {setIdProveedor(value)}}
-                                id='id_proveedor'>
-                                <option value='0'>Seleccionar</option>
-                                {
-                                    lista_proveedores && lista_proveedores.length > 0 ? (
-                                        lista_proveedores.map ((proveedor, index) => {
-                                            return (
-                                                <option value={proveedor.id}>{proveedor.proveedor}</option>
-                                            )
-                                        })
-                                    ) : null
-                                }
-                            </select>
-                        </div>
-                    </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 561 / proporcional, height: 50 / proporcional, border: enombre_producto ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginBottom: 5 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Nombre producto (*):
+                        style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                        {
+                            !nueva_medida ? (
+                                <select
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                    className='form-select border-0 '
+                                    onChange={(event) => seleccion_medida_tipo_producto (event.target.value)}
+                                    id='id_medida_producto'>
+                                    <option value='0'>{medida === '' ? 'Seleccionar dimensiones' : medida}</option>
+                                    <option value='00'>Agregar nuevo</option>
+                                    {
+                                        lista_medidas && lista_medidas.length > 0 ? (
+                                            lista_medidas.map ((medida, index) => {
+                                                return (
+                                                    <option key={index} value={medida.id + '-' + medida.nombre_medida}>{medida.nombre_medida}</option>
+                                                )
+                                            })
+                                        ) : null
+                                    }
+                                </select>
+                            ) : (
+                                <div className='d-flex shadow-sm bg-white rounded' 
+                                    style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <input
+                                        type='default'
+                                        style={{fontFamily: 'Mukta, sans-serif', width: '90%', height: 48 / proporcional, fontSize: 16 / proporcional}}
+                                        className='form-control border-0 '
+                                        onChange={(event) => setMedida(event.target.value)}
+                                        value={medida}
+                                        placeholder='Dimensiones Ej. 4 1/2'
+                                        id='medida'/>
+                                    <div className='d-flex justify-content-center' style={{width: '10%', height: 50 / proporcional}}>
+                                        <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 13 / proporcional, cursor: 'pointer'}}
+                                            onClick={() => guardar_medida_tipo ()}/>
+                                    </div>
+                                </div>
+                            )
+                        }
+                    </div>
+                </div>
+                <div style={{width: '49%', height: 'auto'}}>
+                    <div className='d-flex shadow-sm bg-white rounded' 
+                        style={{width: '100%', height: 50 / proporcional, border: enombre_producto ? '1px solid red' : '1px solid #B2DFDB', 
+                                                    borderRadius: 4 / proporcional, marginBottom: 10 / proporcional}}>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                    lineHeight: `${48 / proporcional}px`, color: '#757575', paddingLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} 
+                                    className='mb-0'>
+                            Nombre producto (*):
                         </p>
                         <input type='text'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 351 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
+                            style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                             className='form-control border-0 '
                             value={nombre_producto}
                             onChange={(event) => {setNombreProducto(event.target.value)}}
                             id='nombre_producto'
                             placeholder='E.j. Lija'/>
                     </div>
-                    <div style={{width: 561 / proporcional, height: 152 / proporcional, marginBottom: 5 / proporcional}}>
-                        <div className='shadow-sm bg-white rounded' style={{width: 561 / proporcional, height: 134 / proporcional, 
+                    <div style={{width: '100%', height: 110 / proporcional}}>
+                        <div className='shadow-sm bg-white rounded' style={{width: '100%', height: 110 / proporcional, 
                                                 border: edescripcion ? '1px solid red' : '1px solid #B2DFDB', 
                                                 borderRadius: 4 / proporcional}}>
                             <textarea
@@ -260,32 +382,32 @@ export default function NuevoProductoTablet({proporcional}) {
                                 rows={3}
                                 id='descripcion'
                                 aria-label='descripcion'
-                                style={{fontFamily: 'Mukta, sans-serif', width: 557 / proporcional, height: 132 / proporcional, fontSize: 18 / proporcional, lineHeight: `${18 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${16 / proporcional}px`, fontWeight: 500, color: '#212121'}}
                                 className='form-control border-0 '
                                 placeholder='Descripción del proveedor (*)'
                                 onChange={(event) => {setDescripcion(event.target.value); setCountDescripcion(descripcion.length - 1);}}
-                                value={descripcion.slice(0, 500)}
+                                value={descripcion.slice(0, 250)}
                                 />
                         </div>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 561 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                    lineHeight: `${18 / proporcional}px`, color: count_descripcion >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                            {500 - count_descripcion}
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${14 / proporcional}px`, color: count_descripcion >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_descripcion}
                         </p>
                     </div>
                 </div>
             </div>
-            <div style={{with: 871 / proporcional, height: 'auto'}}>
-                <div className='d-flex' 
-                    style={{width: 871 / proporcional, height: 50 / proporcional, marginBottom: 25 / proporcional}}>
+            <div style={{with: '100%', height: 'auto'}}>
+                <div className='d-flex justify-content-between' 
+                    style={{width: '100%', height: 50 / proporcional, marginBottom: 25 / proporcional}}>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 280   / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 80 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                        style={{width: '32%', height: 50 / proporcional, border: '1px solid #B2DFDB', 
+                                                    borderRadius: 4 / proporcional}}>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '20%', height: 50 / proporcional, fontSize: 16 / proporcional, 
+                                    lineHeight: `${50 / proporcional}px`, color: '#757575', paddingLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         Cantidad:
                         </p>
                         <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 190 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            style={{fontFamily: 'Mukta, sans-serif', width: '80%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
                                     }}
                             className='form-control border-0 '
                             value={cantidad}
@@ -294,12 +416,12 @@ export default function NuevoProductoTablet({proporcional}) {
                             placeholder='0'/>
                     </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 280   / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', marginRight: 5 / proporcional,
-                                                    borderRadius: 4 / proporcional, marginLeft: 5 / proporcional}}>
+                        style={{width: '33%', height: 50 / proporcional, border: '1px solid #B2DFDB',
+                                                    borderRadius: 4 / proporcional}}>
                         <select
-                            style={{fontFamily: 'Mukta, sans-serif', width: 276 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
+                            style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, fontWeight: 500, color: '#212121'}}
                             className='form-select border-0 '
+                            value={medida}
                             onChange={(value) => {setMedida(value)}}
                             id='medida'>
                             <option value='0'>Seleccionar</option>
@@ -310,13 +432,13 @@ export default function NuevoProductoTablet({proporcional}) {
                         </select>
                     </div>
                     <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 280 / proporcional, height: 50 / proporcional, 
-                                                    borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 50 / proporcional, height: 50 / proporcional, fontSize: 16 / proporcional, 
+                        style={{width: '33%', height: 50 / proporcional, 
+                                                    borderRadius: 4 / proporcional, paddingLeft: 10 / proporcional}}>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '20%', height: 50 / proporcional, fontSize: 16 / proporcional, 
                                     lineHeight: `${50 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
                                         {`${mostrar ? 'ON' : 'OFF'}`}:
                         </p>
-                        <div className='d-flex justify-content-center' style={{width: 220 / proporcional, height: 32 / proporcional, marginTop: 9 / proporcional,
+                        <div className='d-flex justify-content-center' style={{width: '80%', height: 32 / proporcional, marginTop: 9 / proporcional,
                                 marginBottom: 9 / proporcional}}>
                             <img src={!mostrar ? icono_toggle_on : icono_toggle_off} style={{width: 32 / proporcional, height: 32 / proporcional, 
                                     cursor: 'pointer'}}
@@ -324,238 +446,363 @@ export default function NuevoProductoTablet({proporcional}) {
                         </div>
                     </div>
                 </div>
-                <div style={{width: 871 / proporcional, height: 'auto', marginBottom: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 100 / proporcional, border: '1px solid #B2DFDB',
-                                                    borderRadius: 4 / proporcional}}>
-                        <textarea 
-                            style={{fontFamily: 'Mukta, sans-serif', width: 869 / proporcional, height: 98 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            cols={2}
-                            className='form-control border-0 '
-                            value={caracteristicas_uno}
-                            onChange={(event) => {setCaracteristicasUno(event.target.value); setCaracteristicaUno(count_caracteristica_uno.length -1)}}
-                            id='caracteristicas_uno'
-                            placeholder='Característica uno'/>
+                <div className='d-flex justify-content-between' style={{width: '100%', height: 'auto', marginBottom: 20 / proporcional}}>
+                    <div style={{width: '49%', height: 110 / proporcional}}>
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 110 / proporcional, border: '1px solid #B2DFDB',
+                                                        borderRadius: 4 / proporcional}}>
+                            <textarea 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 98 / proporcional, fontSize: 16 / proporcional, 
+                                        lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                cols={2}
+                                className='form-control border-0 '
+                                value={caracteristicas_uno.slice(0, 250)}
+                                onChange={(event) => {setCaracteristicaUno(event.target.value); setCountCaracteristicaUno(caracteristicas_uno.length -1)}}
+                                id='caracteristicas_uno'
+                                placeholder='Característica uno'/>
+                        </div>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${16 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_caracteristica_uno}
+                        </p>
                     </div>
-                    <p style={{fontFamily: 'Mukta, sans-serif', width: 871 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                lineHeight: `${18 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                        {500 - count_caracteristica_uno}
-                    </p>
-                </div>
-                <div style={{width: 871 / proporcional, height: 'auto', marginBottom: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 100 / proporcional, border: '1px solid #B2DFDB',
-                                                    borderRadius: 4 / proporcional}}>
-                        <textarea 
-                            style={{fontFamily: 'Mukta, sans-serif', width: 869 / proporcional, height: 98 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            cols={2}
-                            className='form-control border-0 '
-                            value={caracteristicas_dos}
-                            onChange={(event) => {setCaracteristicasDos(event.target.value); setCaracteristicaDos(count_caracteristica_dos.length -1)}}
-                            id='caracteristicas_dos'
-                            placeholder='Característica dos'/>
+                    <div style={{width: '49%', height: 'auto'}}>
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 110 / proporcional, border: '1px solid #B2DFDB',
+                                                        borderRadius: 4 / proporcional}}>
+                            <textarea 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                        }}
+                                cols={2}
+                                className='form-control border-0 '
+                                value={caracteristicas_dos.slice(0, 250)}
+                                onChange={(event) => {setCaracteristicaDos(event.target.value); setCountCaracteristicaDos(caracteristicas_dos.length -1)}}
+                                id='caracteristicas_dos'
+                                placeholder='Característica dos'/>
+                        </div>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${16 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_caracteristica_dos}
+                        </p>
                     </div>
-                    <p style={{fontFamily: 'Mukta, sans-serif', width: 871 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                lineHeight: `${18 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                        {500 - count_caracteristica_dos}
-                    </p>
                 </div>
-                <div style={{width: 871 / proporcional, height: 'auto', marginBottom: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 100 / proporcional, border: '1px solid #B2DFDB',
-                                                    borderRadius: 4 / proporcional}}>
-                        <textarea 
-                            style={{fontFamily: 'Mukta, sans-serif', width: 869 / proporcional, height: 98 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            cols={2}
-                            className='form-control border-0 '
-                            value={caracteristicas_tres}
-                            onChange={(event) => {setCaracteristicasTres(event.target.value); setCaracteristicatres(count_caracteristica_tres.length -1)}}
-                            id='caracteristicas_tres'
-                            placeholder='Característica tres'/>
+                <div className='d-flex justify-content-between' style={{width: '100%', height: 'auto', marginBottom: 20 / proporcional}}>
+                    <div style={{width: '49%', height: 110 / proporcional}}>
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 110 / proporcional, border: '1px solid #B2DFDB',
+                                                        borderRadius: 4 / proporcional}}>
+                            <textarea 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, 
+                                        lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                cols={2}
+                                className='form-control border-0 '
+                                value={caracteristicas_tres.slice(0, 250)}
+                                onChange={(event) => {setCaracteristicaTres(event.target.value); setCountCaracteristicaTres(caracteristicas_tres.length -1)}}
+                                id='caracteristicas_tres'
+                                placeholder='Característica tres'/>
+                        </div>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${16 / proporcional}px`, color: count_caracteristica_tres >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_caracteristica_tres}
+                        </p>
                     </div>
-                    <p style={{fontFamily: 'Mukta, sans-serif', width: 871 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                lineHeight: `${18 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                        {500 - count_caracteristica_tres}
-                    </p>
-                </div>
-                <div style={{width: 871 / proporcional, height: 'auto', marginBottom: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 100 / proporcional, border: '1px solid #B2DFDB',
-                                                    borderRadius: 4 / proporcional}}>
-                        <textarea 
-                            style={{fontFamily: 'Mukta, sans-serif', width: 869 / proporcional, height: 98 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            cols={2}
-                            className='form-control border-0 '
-                            value={caracteristicas_cuatro}
-                            onChange={(event) => {setCaracteristicasCuatro(event.target.value); setCaracteristicaCuatro(count_caracteristica_cuatro.length -1)}}
-                            id='caracteristicas_cuatro'
-                            placeholder='Característica cuatro'/>
+                    <div style={{width: '49%', height: 'auto'}}>
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 110 / proporcional, border: '1px solid #B2DFDB',
+                                                        borderRadius: 4 / proporcional}}>
+                            <textarea 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                        }}
+                                cols={2}
+                                className='form-control border-0 '
+                                value={caracteristicas_cuatro.slice(0, 250)}
+                                onChange={(event) => {setCaracteristicaCuatro(event.target.value); setCountCaracteristicaCuatro(caracteristicas_cuatro.length -1)}}
+                                id='caracteristicas_cuatro'
+                                placeholder='Característica cuatro'/>
+                        </div>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${16 / proporcional}px`, color: count_caracteristica_cuatro >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_caracteristica_cuatro}
+                        </p>
                     </div>
-                    <p style={{fontFamily: 'Mukta, sans-serif', width: 871 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                lineHeight: `${18 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                        {500 - count_caracteristica_cuatro}
-                    </p>
                 </div>
-                <div style={{width: 871 / proporcional, height: 'auto', marginBottom: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 100 / proporcional, border: '1px solid #B2DFDB',
-                                                    borderRadius: 4 / proporcional}}>
-                        <textarea 
-                            style={{fontFamily: 'Mukta, sans-serif', width: 869 / proporcional, height: 98 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            cols={2}
-                            className='form-control border-0 '
-                            value={caracteristicas_cinco}
-                            onChange={(event) => {setCaracteristicasCinco(event.target.value); setCaracteristicaCinco(count_caracteristica_cinco.length -1)}}
-                            id='caracteristicas_cinco'
-                            placeholder='Característica cinco'/>
+                <div className='d-flex justify-content-start' style={{width: '100%', height: 'auto', marginBottom: 20 / proporcional}}>
+                    <div style={{width: '49%', height: 110 / proporcional}}>
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 110 / proporcional, border: '1px solid #B2DFDB',
+                                                        borderRadius: 4 / proporcional}}>
+                            <textarea 
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 108 / proporcional, fontSize: 16 / proporcional, 
+                                        lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                cols={2}
+                                className='form-control border-0 '
+                                value={caracteristicas_cinco.slice(0, 250)}
+                                onChange={(event) => {setCaracteristicaCinco(event.target.value); setCountCaracteristicaCinco(caracteristicas_cinco.length -1)}}
+                                id='caracteristicas_cinco'
+                                placeholder='Característica cinco'/>
+                        </div>
+                        <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', fontSize: 12 / proporcional, 
+                                    lineHeight: `${16 / proporcional}px`, color: count_caracteristica_cinco >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                            {250 - count_caracteristica_cinco}
+                        </p>
                     </div>
-                    <p style={{fontFamily: 'Mukta, sans-serif', width: 871 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                lineHeight: `${18 / proporcional}px`, color: count_caracteristica_uno >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                        {500 - count_caracteristica_cinco}
-                    </p>
-                    
                 </div>
-                <div className='d-flex' style={{width: 871 / proporcional}}>
-                    <div style={{width: 207 / proporcional, height: 207 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginRight: 10 / proporcional}}>
+                <div className='d-flex justify-content-between' style={{width: '100%', marginBottom: 20 / proporcional}}>
+                    <div style={{width: '24%', height: 'auto', border: efoto_uno ? '1px solid red' : 'none'}}>
+                        {
+                            foto_uno === '' ? ( 
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                </div>
+                            ) : (
+                                <div className='position-relative' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_uno} style={{width: '100%', hight: 220 / proporcional}}/>
+                                </div>
+                            )
+                        }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_uno}
+                                onChange={(event) => {setFotoUno(event.target.value)}}
+                                id='foto_uno'
+                                placeholder='Url de la foto uno'/>
+                        </div>
+                    </div>
+                    <div style={{width: '24%', height: 'auto'}}>
                         {
                             foto_dos === '' ? ( 
-                                <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <div style={{width: 205 / proporcional, height: 205 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_dos()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-dos' onChange={(event) => handle_image_change_dos(event)} />
-                                    </div>
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
                                 </div>
                             ) : (
                                 <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <AvatarEditor
-                                        width={205 / proporcional}
-                                        height={205 / proporcional}
-                                        image={foto_dos}
-                                        color={[255, 255, 255, 0]}
-                                        borderRadius={parseFloat(4)}
-                                        scale={1.0}
-                                        ref={(editor) => set_editor_ref_dos(editor)}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_dos()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-dos' onChange={(event) => handle_image_change_dos(event)} />
-                                    </div>
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_dos} style={{width: '100%', hight: 220 / proporcional}}/>
                                 </div>
                             )
                         }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_dos}
+                                onChange={(event) => {setFotoDos(event.target.value)}}
+                                id='foto_dos'
+                                placeholder='Url de la foto dos'/>
+                        </div>
                     </div>
-                    <div style={{width: 207 / proporcional, height: 207 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginLeft: 5 / proporcional, marginRight: 5 / proporcional}}>
+                    <div style={{width: '24%', height: 'auto'}}>
                         {
                             foto_tres === '' ? ( 
-                                <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <div style={{width: 205 / proporcional, height: 205 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_tres()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-tres' onChange={(event) => handle_image_change_tres(event)} />
-                                    </div>
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
                                 </div>
                             ) : (
                                 <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <AvatarEditor
-                                        width={205 / proporcional}
-                                        height={205 / proporcional}
-                                        image={foto_tres}
-                                        color={[255, 255, 255, 0]}
-                                        borderRadius={parseFloat(4)}
-                                        scale={1.0}
-                                        ref={(editor) => set_editor_ref_tres(editor)}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_tres()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-tres' onChange={(event) => handle_image_change_tres(event)} />
-                                    </div>
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_tres} style={{width: '100%', hight: 220 / proporcional}}/>
                                 </div>
                             )
                         }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_tres}
+                                onChange={(event) => {setFotoTres(event.target.value)}}
+                                id='foto_tres'
+                                placeholder='Url de la foto tres'/>
+                        </div>
                     </div>
-                    <div style={{width: 207 / proporcional, height: 207 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginLeft: 5 / proporcional, marginRight: 5 / proporcional}}>
+                    <div style={{width: '24%', height: 'auto'}}>
                         {
                             foto_cuatro === '' ? ( 
-                                <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <div style={{width: 205 / proporcional, height: 205 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_cuatro()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-cuatro' onChange={(event) => handle_image_change_cuatro(event)} />
-                                    </div>
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
                                 </div>
                             ) : (
                                 <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <AvatarEditor
-                                        width={205 / proporcional}
-                                        height={205 / proporcional}
-                                        image={foto_cuatro}
-                                        color={[255, 255, 255, 0]}
-                                        borderRadius={parseFloat(4)}
-                                        scale={1.0}
-                                        ref={(editor) => set_editor_ref_cuatro(editor)}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_cuatro()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-cuatro' onChange={(event) => handle_image_change_cuatro(event)} />
-                                    </div>
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_cuatro} style={{width: '100%', hight: 220 / proporcional}}/>
                                 </div>
                             )
                         }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_cuatro}
+                                onChange={(event) => {setFotoCuatro(event.target.value)}}
+                                id='foto_cuatro'
+                                placeholder='Url de la foto cuatro'/>
+                        </div>
                     </div>
-                    <div style={{width: 207 / proporcional, height: 207 / proporcional, border: efoto_uno ? '1px solid red' : 'none', marginLeft: 10 / proporcional}}>
+                </div>
+                <div className='d-flex justify-content-between' style={{width: '100%', marginBottom: 20 / proporcional}}>
+                    <div style={{width: '24%', height: 'auto'}}>
                         {
                             foto_cinco === '' ? ( 
-                                <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <div style={{width: 205 / proporcional, height: 205 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_cinco()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-cinco' onChange={(event) => handle_image_change_cinco(event)} />
-                                    </div>
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
                                 </div>
                             ) : (
                                 <div className='position-relative' 
-                                    style={{width: 205 / proporcional, height: 205 / proporcional, marginRight: 25 / proporcional}}>
-                                    <AvatarEditor
-                                        width={205 / proporcional}
-                                        height={205 / proporcional}
-                                        image={foto_cinco}
-                                        color={[255, 255, 255, 0]}
-                                        borderRadius={parseFloat(4)}
-                                        scale={1.0}
-                                        ref={(editor) => set_editor_ref_cinco(editor)}/>
-                                    <div id='imagen' className='position-absolute translate-middle' type='button' onClick={() => handle_editar_picture_cinco()}
-                                        style={{bottom: -48 / proporcional, left: '50%', width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
-                                        <img src={icono_camera} style={{wigth: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}/>
-                                        < input href='#' hidden='hidden' className='btn' type='file' accept='.gif, .jpg, .jpeg, .png'
-                                            id='foto-producto-cinco' onChange={(event) => handle_image_change_cinco(event)} />
-                                    </div>
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_cinco} style={{width: '100%', hight: 220 / proporcional}}/>
                                 </div>
                             )
                         }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_cinco}
+                                onChange={(event) => {setFotoCinco(event.target.value)}}
+                                id='foto_cinco'
+                                placeholder='Url de la foto cinco'/>
+                        </div>
+                    </div>
+                    <div style={{width: '24%', height: 'auto'}}>
+                        {
+                            foto_seis === '' ? ( 
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                </div>
+                            ) : (
+                                <div className='position-relative' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_seis} style={{width: '100%', hight: 220 / proporcional}}/>
+                                </div>
+                            )
+                        }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_seis}
+                                onChange={(event) => {setFotoSeis(event.target.value)}}
+                                id='foto_seis'
+                                placeholder='Url de la foto seis'/>
+                        </div>
+                    </div>
+                    <div style={{width: '24%', height: 'auto'}}>
+                        {
+                            foto_siete === '' ? ( 
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                </div>
+                            ) : (
+                                <div className='position-relative' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_siete} style={{width: '100%', hight: 220 / proporcional}}/>
+                                </div>
+                            )
+                        }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_siete}
+                                onChange={(event) => {setFotoSiete(event.target.value)}}
+                                id='foto_siete'
+                                placeholder='Url de la foto siete'/>
+                        </div>
+                    </div>
+                    <div style={{width: '24%', height: 'auto'}}>
+                        {
+                            foto_ocho === '' ? ( 
+                                <div className='' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                </div>
+                            ) : (
+                                <div className='position-relative' 
+                                    style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                    <img src={foto_ocho} style={{width: '100%', hight: 220 / proporcional}}/>
+                                </div>
+                            )
+                        }
+                        <div className='d-flex shadow-sm bg-white rounded' 
+                            style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                            <input type='url'
+                                style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                className='form-control border-0 '
+                                value={foto_ocho}
+                                onChange={(event) => {setFotoOcho(event.target.value)}}
+                                id='foto_ocho'
+                                placeholder='Url de la foto ocho'/>
+                        </div>
+                    </div>
+                </div>
+                <div className='d-flex justify-content-center' style={{width: '100%', marginBottom: 20 / proporcional}}>
+                    <div className='d-flex justify-content-between' style={{width: '50%', hight: 'auto'}}>
+                        <div style={{width: '49%', height: 'auto'}}>
+                            {
+                                foto_nueve === '' ? ( 
+                                    <div className='' 
+                                        style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                        <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                    </div>
+                                ) : (
+                                    <div className='position-relative' 
+                                        style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                        <img src={foto_nueve} style={{width: '100%', hight: 220 / proporcional}}/>
+                                    </div>
+                                )
+                            }
+                            <div className='d-flex shadow-sm bg-white rounded' 
+                                style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                                <input type='url'
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                    className='form-control border-0 '
+                                    value={foto_nueve}
+                                    onChange={(event) => {setFotoNueve(event.target.value)}}
+                                    id='foto_nueve'
+                                    placeholder='Url de la foto nueve'/>
+                            </div>
+                        </div>
+                        <div style={{width: '49%', height: 'auto'}}>
+                            {
+                                foto_diez === '' ? ( 
+                                    <div className='' 
+                                        style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                        <div style={{width: '100%', height: 220 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                    </div>
+                                ) : (
+                                    <div className='position-relative' 
+                                        style={{width: '100%', height: 220 / proporcional, marginBottom: 10 / proporcional}}>
+                                        <img src={foto_diez} style={{width: '100%', hight: 220 / proporcional}}/>
+                                    </div>
+                                )
+                            }
+                            <div className='d-flex shadow-sm bg-white rounded' 
+                                style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                                <input type='url'
+                                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 48 / proporcional, fontSize: 16 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                                    className='form-control border-0 '
+                                    value={foto_diez}
+                                    onChange={(event) => {setFotoDiez(event.target.value)}}
+                                    id='foto_diez'
+                                    placeholder='Url de la foto diez'/>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -563,18 +810,26 @@ export default function NuevoProductoTablet({proporcional}) {
                 open_menu_derecho ? ( 
                     <div className='position-absolute shadow rounded' 
                             style={{width: 330 / proporcional, padding: 30 / proporcional, top: -60 / proporcional, right: 20 / proporcional, background: 'white'}}>
+                            <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
+                                onClick={() => {guardar_producto(false); dispatch(set_open_menu_derecho(false))}}>
+                                <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
+                                <p style={{fontSize: 16 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                    Guardar producto
+                                </p>
+                            </div>
+                            <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
-                            onClick={() => {guardar_producto(); dispatch(set_open_menu_derecho(false))}}>
+                            onClick={() => {guardar_producto(true); dispatch(set_open_menu_derecho(false))}}>
                             <img src={icono_guardar} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
-                            <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
-                                Guardar producto
+                            <p style={{fontSize: 16 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                                Guardar y agregar otro producto
                             </p>
                         </div>
                         <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
                             onClick={() => {dispatch(set_open_menu_derecho(false)); navigate('/home/productos')}}>
                             <img src={icono_volver} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
-                            <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
+                            <p style={{fontSize: 16 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
                                 Volver productos
                             </p>
                         </div>

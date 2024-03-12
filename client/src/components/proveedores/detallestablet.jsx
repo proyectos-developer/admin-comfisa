@@ -113,25 +113,25 @@ export default function  DetallesProveedorTablet({proporcional}) {
     }, [])
 
     return (
-        <div className='' 
+        <div className='position-relative' 
             style={{width: '100%', paddingLeft: 60 / proporcional, paddingRight: 60 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
-            <div style={{width: '100%', height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginBottom: 25 / proporcional}}>
-                {
-                    foto_logo === '' && !editar ? ( 
-                        <div className='d-flex justify-content-center' 
-                            style={{width: '100%', height: 278 / proporcional}}>
-                            <div style={{width: 278 / proporcional, height: 278 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
-                        </div>
-                    ) : foto_logo !== '' && !editar ? ( 
-                        <div className='d-flex justify-content-center' 
-                            style={{width: '100%', height: 278 / proporcional}}>
-                            <img src={foto_logo} style={{width: 278 / proporcional, height: 278 / proporcional, cursor: 'pointer'}}/>
-                        </div>
-                    )  : foto_logo === '' && editar ? ( 
-                        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto'}}>
+            <div className='d-flex justify-content-center' style={{width: '100%', height: 278 / proporcional, marginBottom: 50 / proporcional}}>
+                <div style={{width: 280 / proporcional, height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
+                    {
+                        foto_logo === '' && !editar ? ( 
+                            <div className='position-relative' 
+                                style={{width: '100%', height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                <div style={{width: '100%', height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
+                            </div>
+                        ) : foto_logo !== '' && !editar ? ( 
+                            <div className='position-relative' 
+                                style={{width: '100%', height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                <img src={foto_logo} style={{width: '100%', height: 278 / proporcional, cursor: 'pointer'}}/>
+                            </div>
+                        )  : foto_logo === '' && editar ? ( 
                             <div className='' 
-                                style={{width: 'auto', height: 278 / proporcional}}>
-                                <div style={{width: 278 / proporcional, height: 278 / proporcional, background: '#bdbdbd', borderRadius: 4 / proporcional}}/>
+                                style={{width: '100%', height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                <div style={{width: '100%', height: 278 / proporcional, background: '#bdbdbd', marginRight: 25 / proporcional, borderRadius: 4 / proporcional}}/>
                                 <div className='position-relative' style={{width: '100%', height: 48 / proporcional}}>
                                     <div id='imagen' className='position-absolute start-50 translate-middle' type='button' onClick={() => {editar ? handle_editar_picture() : null}}
                                         style={{bottom: 24 / proporcional, width: 48 / proporcional, height: 48 / proporcional, cursor: 'pointer'}}>
@@ -141,12 +141,10 @@ export default function  DetallesProveedorTablet({proporcional}) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ) : foto_logo !== '' && editar ? (
-                        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto'}}>
+                        ) : foto_logo !== '' && editar ? (
                             <div className='' 
-                                style={{width: 'auto', height: 236 / proporcional}}>
-                                <div className='' style={{width: 'auto', height: 236 / proporcional}}>
+                                style={{width: '100%', height: '100%', marginRight: 25 / proporcional}}>
+                                <div className='' style={{width: '100%', height: 236 / proporcional}}>
                                     <AvatarEditor
                                         width={278 / proporcional}
                                         height={236 / proporcional}
@@ -166,11 +164,11 @@ export default function  DetallesProveedorTablet({proporcional}) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    ) : null
-                }
+                        ) : null
+                    }
+                </div>
             </div>
-            <div className='d-flex justify-content-between' style={{with: '100%', height: 50 / proporcional, marginBottom: 10 / proporcional}}>
+            <div className='d-flex justify-content-between' style={{with: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
                 <div className='d-flex shadow-sm bg-white rounded' 
                     style={{width: '49%', height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
                                                 borderRadius: 4 / proporcional}}>
@@ -227,67 +225,63 @@ export default function  DetallesProveedorTablet({proporcional}) {
                     {500 - count_descripcion}
                 </p>
             </div>
-            <div style={{with: '100%', height: 'auto'}}>
-                <div className='d-flex justify-content-between' style={{with: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: '49%', height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: '42%', height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Número de teléfono:
-                        </p>
-                        <input type='number'
-                            disabled={!editar}
-                            style={{fontFamily: 'Mukta, sans-serif', width: '58%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={nro_telefono}
-                            onChange={(event) => {setNroTelefono(event.target.value)}}
-                            id='nro_telefono'
-                            placeholder='E.j. Norton'/>
-                    </div>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: '49%', height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: '42%', height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Número de R.U.C.:
-                        </p>
-                        <input type='number'
-                            disabled={!editar}
-                            style={{fontFamily: 'Mukta, sans-serif', width: '58%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={nro_ruc}
-                            onChange={(event) => {setNroRuc(event.target.value)}}
-                            id='nro_ruc'
-                            placeholder='E.j. 968xxxxxx'/>
-                    </div>
+            <div className='d-flex justify-content-between' style={{with: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Número de teléfono:
+                    </p>
+                    <input type='number'
+                        disabled={!editar}
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={nro_telefono}
+                        onChange={(event) => {setNroTelefono(event.target.value)}}
+                        id='nro_telefono'
+                        placeholder='E.j. Norton'/>
                 </div>
-                <div className='' style={{with: '100%', height: 50 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: '100%', height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: '20%', height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Dirección:
-                        </p>
-                        <input type='number'
-                            disabled={!editar}
-                            style={{fontFamily: 'Mukta, sans-serif', width: '80%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={direccion}
-                            onChange={(event) => {setDireccion(event.target.value)}}
-                            id='direccion'
-                            placeholder='E.j. Av. José Pardo 135'/>
-                    </div>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Número de R.U.C.:
+                    </p>
+                    <input type='number'
+                        disabled={!editar}
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={nro_ruc}
+                        onChange={(event) => {setNroRuc(event.target.value)}}
+                        id='nro_ruc'
+                        placeholder='E.j. 968xxxxxx'/>
                 </div>
+            </div>
+            <div className='d-flex shadow-sm bg-white rounded' 
+                style={{width: '100%', height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
+                                            borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
+                <p style={{fontFamily: 'Mukta, sans-serif', width: 200 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                            lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                Dirección:
+                </p>
+                <input type='number'
+                    disabled={!editar}
+                    style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                            }}
+                    className='form-control border-0 '
+                    value={direccion}
+                    onChange={(event) => {setDireccion(event.target.value)}}
+                    id='direccion'
+                    placeholder='E.j. Av. José Pardo 135'/>
             </div>
             {
                 open_menu_derecho ? ( 
                     <div className='position-absolute shadow rounded' 
-                            style={{width: 330 / proporcional, padding: 30 / proporcional, top: 75 / proporcional, right: 20 / proporcional, background: 'white'}}>
+                            style={{width: 330 / proporcional, padding: 30 / proporcional, top: -60 / proporcional, right: 20 / proporcional, background: 'white'}}>
                         <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
                             onClick={() => {setEditar(!editar); dispatch(set_open_menu_derecho(!open_menu_derecho))}}>
                             <img src={editar ? icono_cancelar : icono_editar} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>

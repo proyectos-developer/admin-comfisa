@@ -47,6 +47,18 @@ import DetallesProducto from './components/productos/detalles.jsx'
 import DetallesProductoTablet from './components/productos/detallestablet.jsx'
 import DetallesProductoCell from './components/productos/detallescell.jsx'
 
+import CotizacionesPanel from './components/Cotizaciones/panel.jsx'
+import CotizacionesPanelTablet from './components/cotizaciones/paneltablet.jsx'
+import CotizacionesPanelCell from './components/cotizaciones/panelcell.jsx'
+
+import ListaCotizaciones from './components/cotizaciones/cotizaciones.jsx'
+import ListaCotizacionesTablet from './components/cotizaciones/cotizacionestablet.jsx'
+import ListaCotizacionesCell from './components/cotizaciones/cotizacionescell.jsx'
+
+import DetallesCotizacion from './components/cotizaciones/detalles.jsx'
+import DetallesCotizacionTablet from './components/cotizaciones/detallestablet.jsx'
+import DetallesCotizacionCell from './components/cotizaciones/detallescell.jsx'
+
 function App() {
   const [width, setWidth] = useState (window.outerWidth)
 
@@ -107,6 +119,19 @@ function App() {
                         <Route path='detalles-producto/:id_producto' element={width < 500 ? <DetallesProductoCell proporcional={499 / width}/> : 
                                                                               width < 991 ? <DetallesProductoTablet proporcional={991 / width}/> : 
                                                                                             <DetallesProducto proporcional={1920 / width} />}/>
+                                                                      
+                  </Route>
+                  
+                  <Route path='cotizaciones' element={width < 500 ? <CotizacionesPanelCell proporcional={499 / width}/> : 
+                                                              width < 991 ? <CotizacionesPanelTablet proporcional={991 / width}/> : 
+                                                                            <CotizacionesPanel proporcional={1920 / width} />}>
+                        <Route index element={width < 500 ? <ListaCotizacionesCell proporcional={499 / width}/> : 
+                                              width < 991 ? <ListaCotizacionesTablet proporcional={991 / width}/> : 
+                                                            <ListaCotizaciones proporcional={1920 / width} />}/>
+                                                            
+                        <Route path='detalles/:id_cotizacion' element={width < 500 ? <DetallesCotizacionCell proporcional={499 / width}/> : 
+                                                                       width < 991 ? <DetallesCotizacionTablet proporcional={991 / width}/> : 
+                                                                                     <DetallesCotizacion proporcional={1920 / width} />}/>
                                                                       
                   </Route>
             </Route>

@@ -14,7 +14,7 @@ import icono_add from '../../assets/iconos/icono_add_blue_96.png'
 
 import CardProveedorTablet from './cards/proveedortablet.jsx'
 
-export default function ListaProveedores({proporcional}) {
+export default function ListaProveedoresTablet({proporcional}) {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()

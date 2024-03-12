@@ -82,8 +82,8 @@ export default function NuevoProveedorTablet({proporcional}) {
     return (
         <div className='position-relative' 
             style={{width: '100%', paddingLeft: 60 / proporcional, paddingRight: 60 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
-            <div className='d-flex' style={{width: 871 / proporcional, height: 278 / proporcional, marginBottom: 50 / proporcional}}>
-                <div style={{width: 372 / proporcional, height: 280 / proporcional, border: efoto_logo ? '1px solid red' : 'none', marginRight: 23 / proporcional}}>
+            <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto', marginBottom: 60 / proporcional}}>
+                <div style={{width: 372 / proporcional, height: 'auto', border: efoto_logo ? '1px solid red' : 'none'}}>
                     {
                         foto_logo === '' ? ( 
                             <div className='position-relative' 
@@ -98,7 +98,7 @@ export default function NuevoProveedorTablet({proporcional}) {
                             </div>
                         ) : (
                             <div className='position-relative' 
-                                style={{width: 370 / proporcional, height: 278 / proporcional, marginRight: 25 / proporcional}}>
+                                style={{width: 370 / proporcional, height: 278 / proporcional}}>
                                 <AvatarEditor
                                     width={370 / proporcional}
                                     height={278 / proporcional}
@@ -117,113 +117,112 @@ export default function NuevoProveedorTablet({proporcional}) {
                         )
                     }
                 </div>
-                <div style={{width: 451 / proporcional, height: 50 / proporcional, marginLeft: 25 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 451 / proporcional, height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginBottom: 5 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Nombre proveedor (*):
-                        </p>
-                        <input type='text'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 281 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={nombre_proveedor}
-                            onChange={(event) => {setNombreProveedor(event.target.value)}}
-                            id='nombre_proveedor'
-                            placeholder='E.j. Norton'/>
-                    </div>
-                    <div style={{width: 451 / proporcional, height: 168 / proporcional, marginBottom: 5 / proporcional}}>
-                        <div className='shadow-sm bg-white rounded' style={{width: 451 / proporcional, height: 150 / proporcional, border: '1px solid #B2DFDB', 
+            </div>
+
+            <div className='d-flex justify-content-between' style={{width: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: enombre_proveedor ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginBottom: 5 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 50 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Nombre proveedor (*):
+                    </p>
+                    <input type='text'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={nombre_proveedor}
+                        onChange={(event) => {setNombreProveedor(event.target.value)}}
+                        id='nombre_proveedor'
+                        placeholder='E.j. Norton'/>
+                </div>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: ecorreo ? '1px solid red' : '1px solid #B2DFDB', 
                                                 borderRadius: 4 / proporcional}}>
-                            <textarea
-                                type='text'
-                                rows={3}
-                                id='descripcion'
-                                aria-label='descripcion'
-                                style={{fontFamily: 'Mukta, sans-serif', width: 447 / proporcional, height: 148 / proporcional, fontSize: 18 / proporcional, lineHeight: `${18 / proporcional}px`, fontWeight: 500, color: '#212121'}}
-                                className='form-control border-0 '
-                                placeholder='Descripción del proveedor (*)'
-                                onChange={(event) => {setDescripcion(event.target.value); setCountDescripcion(descripcion.length - 1);}}
-                                value={descripcion.slice(0, 500)}
-                                />
-                        </div>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 451 / proporcional, paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
-                                    lineHeight: `${18 / proporcional}px`, color: count_descripcion >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
-                            {500 - count_descripcion}
-                        </p>
-                    </div>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 451 / proporcional, height: 50 / proporcional, border: ecorreo ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Correo electrónico:
-                        </p>
-                        <input type='text'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 281 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={correo}
-                            onChange={(event) => {setCorreo(event.target.value)}}
-                            id='correo'
-                            placeholder='E.j. nombre@dominio.com'/>
-                    </div>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 50 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Correo electrónico:
+                    </p>
+                    <input type='text'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={correo}
+                        onChange={(event) => {setCorreo(event.target.value)}}
+                        id='correo'
+                        placeholder='E.j. nombre@dominio.com'/>
                 </div>
             </div>
-            <div style={{with: 871 / proporcional, height: 50 / proporcional}}>
-                <div className='d-flex' style={{with: 871 / proporcional, height: 50 / proporcional, marginBottom: 20 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 425.5 / proporcional, height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Número de teléfono:
-                        </p>
-                        <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 255.5 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={nro_telefono}
-                            onChange={(event) => {setNroTelefono(event.target.value)}}
-                            id='nro_telefono'
-                            placeholder='E.j. Norton'/>
-                    </div>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 425.5 / proporcional, height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Número de R.U.C.:
-                        </p>
-                        <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 255.5 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={nro_ruc}
-                            onChange={(event) => {setNroRuc(event.target.value)}}
-                            id='nro_ruc'
-                            placeholder='E.j. 968xxxxxx'/>
-                    </div>
+            <div style={{width: '100%', height: 168 / proporcional, marginBottom: 5 / proporcional}}>
+                <div className='shadow-sm bg-white rounded' style={{width: '100%', height: 150 / proporcional, border: '1px solid #B2DFDB', 
+                                        borderRadius: 4 / proporcional}}>
+                    <textarea
+                        type='text'
+                        rows={3}
+                        id='descripcion'
+                        aria-label='descripcion'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '100%', height: 148 / proporcional, fontSize: 18 / proporcional, lineHeight: `${18 / proporcional}px`, fontWeight: 500, color: '#212121'}}
+                        className='form-control border-0 '
+                        placeholder='Descripción del proveedor (*)'
+                        onChange={(event) => {setDescripcion(event.target.value); setCountDescripcion(descripcion.length - 1);}}
+                        value={descripcion.slice(0, 500)}
+                        />
                 </div>
-                <div className='' style={{with: 871 / proporcional, height: 50 / proporcional}}>
-                    <div className='d-flex shadow-sm bg-white rounded' 
-                        style={{width: 871 / proporcional, height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
-                                                    borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
-                        <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
-                                    lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
-                                        Dirección:
-                        </p>
-                        <input type='number'
-                            style={{fontFamily: 'Mukta, sans-serif', width: 701 / proporcional, height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                    }}
-                            className='form-control border-0 '
-                            value={direccion}
-                            onChange={(event) => {setDireccion(event.target.value)}}
-                            id='direccion'
-                            placeholder='E.j. Av. José Pardo 135'/>
-                    </div>
+                <p style={{fontFamily: 'Mukta, sans-serif', width: '100%', paddingTop: 2 / proporcional, fontSize: 12 / proporcional, 
+                            lineHeight: `${18 / proporcional}px`, color: count_descripcion >= 0 ? '#757575' : 'red', fontWeight: 500, cursor: 'default', textAlign: 'end'}} className='mb-0'>
+                    {500 - count_descripcion}
+                </p>
+            </div>
+            <div className='d-flex' style={{with: '100%', height: 50 / proporcional, marginBottom: 20 / proporcional}}>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: enro_telefono ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Número de teléfono:
+                    </p>
+                    <input type='number'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={nro_telefono}
+                        onChange={(event) => {setNroTelefono(event.target.value)}}
+                        id='nro_telefono'
+                        placeholder='E.j. Norton'/>
+                </div>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '49%', height: 50 / proporcional, border: enro_ruc ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginLeft: 10 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: 160 / proporcional, height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Número de R.U.C.:
+                    </p>
+                    <input type='number'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={nro_ruc}
+                        onChange={(event) => {setNroRuc(event.target.value)}}
+                        id='nro_ruc'
+                        placeholder='E.j. 968xxxxxx'/>
+                </div>
+            </div>
+            <div className='' style={{with: '100%', height: 50 / proporcional}}>
+                <div className='d-flex shadow-sm bg-white rounded' 
+                    style={{width: '100%', height: 50 / proporcional, border: edireccion ? '1px solid red' : '1px solid #B2DFDB', 
+                                                borderRadius: 4 / proporcional, marginRight: 10 / proporcional}}>
+                    <p style={{fontFamily: 'Mukta, sans-serif', width: '40%', height: 48 / proporcional, fontSize: 16 / proporcional, 
+                                lineHeight: `${48 / proporcional}px`, color: '#757575', marginLeft: 10 / proporcional, fontWeight: 600, cursor: 'default'}} className='mb-0'>
+                                    Dirección:
+                    </p>
+                    <input type='number'
+                        style={{fontFamily: 'Mukta, sans-serif', width: '60%', height: 46 / proporcional, fontSize: 18 / proporcional, lineHeight: `${46 / proporcional}px`, fontWeight: 500, color: '#212121',
+                                }}
+                        className='form-control border-0 '
+                        value={direccion}
+                        onChange={(event) => {setDireccion(event.target.value)}}
+                        id='direccion'
+                        placeholder='E.j. Av. José Pardo 135'/>
                 </div>
             </div>
             {

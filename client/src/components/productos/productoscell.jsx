@@ -119,7 +119,7 @@ export default function ListaProductosCell({proporcional}) {
                 </div>
             </div>
             
-            <div style={{width: 459 / proporcional, minHeight: 480 / proporcional}}>
+            <div style={{width: '100%', minHeight: 480 / proporcional}}>
                 {
                     lista_productos && lista_productos.length > 0 ? (
                         lista_productos.map ((producto, numprod) => {

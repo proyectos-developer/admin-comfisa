@@ -14,7 +14,7 @@ import icono_add from '../../assets/iconos/icono_add_blue_96.png'
 
 import CardProveedorCell from './cards/proveedorcell.jsx'
 
-export default function ListaProveedores({proporcional}) {
+export default function ListaProveedoresCell({proporcional}) {
 
     const dispatch = useDispatch()
     const navigate = useNavigate()
@@ -63,9 +63,10 @@ export default function ListaProveedores({proporcional}) {
     }
 
     const buscar_proveedor_por = () => {
+        console.log ('buscar', buscar_proveedor)
         const id = filtros.id
-        const order_by = value.split('-')[0]
-        const order = value.split('-')[1]
+        const order_by = filtros.order_by
+        const order = filtros.order
         dispatch (set_filtro_proveedores_search_order_amount({pagina: 'proveedores', id: id, search: buscar_proveedor, order_by: order_by, order: order}))
         dispatch(proveedoresdata(proveedoresConstants(id, buscar_proveedor, order_by, order, {}, false).get_proveedores_filtro_total))
     }
@@ -83,46 +84,52 @@ export default function ListaProveedores({proporcional}) {
 
     return ( 
         <div className='position-relative' style={{width: '100%', paddingLeft: 20 / proporcional, paddingRight: 20 / proporcional}}>
-            <div className='' style={{width: 459 / proporcional, height: 'auto', marginBottom: 12.5 / proporcional}}>
-                <p className='mb-0' 
-                    style={{width: 459 / proporcional, fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, fontWeight: 400, color: '#212121', 
-                            marginBottom: 12.5 / proporcional, fontFamily: `'Lora', serif`}}>
-                    TUS PROVEEDORES:
-                </p>
-                <div className='shadow-sm bg-white rounded' 
-                    style={{width: 459 / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, marginBottom: 12.5 / proporcional}}>
+            <div className='' style={{width: '100%', height: 'auto', marginBottom: 25 / proporcional }}>
+                <div style={{width: '100%', height: 'auto'}}>
+                    <p className='mb-0' 
+                        style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, fontWeight: 400, color: '#212121', 
+                                ontFamily: `'Lora', serif`}}>
+                        TUS PROVEEDORES:
+                    </p>
+                </div>
+                <div className='shadow-sm' 
+                    style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional, background: 'white',
+                        marginBottom: 20 / proporcional}}>
                     <select
-                        style={{width: 457 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                cursor: 'default', fontFamily: 'Mukta, sans-serif'}}
-                        className='form-select fira-fans-sans-serif border-0'
-                        onChange={(event) => seleccionar_ordenar_por(event.targe.value)}
+                        style={{width: '100%', height: 18 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121', marginTop: 16 / proporcional, 
+                                marginBottom: 16 / proporcional, cursor: 'pointer', fontFamily: 'Mukta, sans-serif', background: 'white', paddingLeft: 15 / proporcional,
+                                paddingRight: 15 / proporcional}}
+                        className='form-select border-0'
+                        onChange={(event) => seleccionar_ordenar_por(event.target.value)}
                     >
-                        <option value='0'>Ordenar por:</option>
+                        <option defaultValue='0'>Ordenar por:</option>
                         <option value='proveedor-ASC'>Nombre proveedor A-Z</option>
                         <option value='proveedor-DESC'>Nombre proveedor Z-A</option>
                     </select>
                 </div>
                 <div className='d-flex shadow-sm bg-white rounded' 
-                    style={{width: 459 / proporcional, height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
+                    style={{width: '100%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional}}>
                     <input
-                        style={{width: 457 / proporcional, height: 48 / proporcional, fontSize: 18 / proporcional, lineHeight: `${48 / proporcional}px`, fontWeight: 500, color: '#212121',
-                                fontFamily: 'Mukta, sans-serif'}}
-                        className='form-control fira-fans-sans-serif border-0'
+                        style={{width: '80%', height: 18 / proporcional, fontSize: 18 / proporcional, fontWeight: 500, color: '#212121', marginTop: 16 / proporcional,
+                                marginBottom: 16 / proporcional, paddingLeft: 15 / proporcional, paddingRight: 15 / proporcional, fontFamily: 'Mukta, sans-serif'}}
+                        className='form-control border-0'
                         onChange={(event) => setBuscarProveedor (event.target.value)}
                         value={buscar_proveedor}
                         placeholder='Buscar proveedor'
                     />
-                    <img src={icono_search} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 12 / proporcional, cursor: 'pointer'}}
-                        onClick={() => buscar_proveedor_por()}/> 
+                    <div className='d-flex justify-content-center' style={{width: '20%', height: '100%' / proporcional}}>
+                        <img src={icono_search} style={{width: 24 / proporcional, height: 24 / proporcional, margin: 12 / proporcional, cursor: 'pointer'}}
+                            onClick={() => buscar_proveedor_por()}/> 
+                    </div>
                 </div>
             </div>
             
-            <div style={{width: 459 / proporcional, minHeight: 480 / proporcional}}>
+            <div style={{width: '100%', minHeight: 480 / proporcional}}>
                 {
                     lista_proveedores && lista_proveedores.length > 0 ? (
                         lista_proveedores.map ((proveedor, numprov) => {
                             return (
-                                <div key={numprov} className='d-flex' 
+                                <div key={numprov} className='d-flex justify-content-center' 
                                     style={{marginBottom: 12.5 / proporcional}}>
                                     <CardProveedorCell proveedor={proveedor} key={numprov} index={numprov} proporcional={proporcional}/>
                                 </div>
