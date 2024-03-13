@@ -16,7 +16,7 @@ app.use(cors())
 require ('./backend/lib/passport.js')
 
 /**Configuraciones */
-app.set ('port', process.env.PORT || 3001);
+app.set ('port', process.env.PORT || 3002);
 app.set('views', path.join(__dirname, 'views')); 
 app.engine('.hbs', exphbs.engine({
     defaultLayout: 'main',
@@ -57,6 +57,7 @@ app.use((req, res, next) => {
 /**app.use(require('./backend/routes/index.js'));**/
 app.use(require('./backend/routes/authentication.js'))
 
+app.use(require('./backend/routes/correo.js'))
 app.use(require('./backend/routes/proveedores.js'))
 app.use(require('./backend/routes/productos.js'))
 app.use(require('./backend/routes/cotizaciones.js'))

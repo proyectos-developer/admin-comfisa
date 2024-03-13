@@ -121,10 +121,12 @@ router.post ('/api/cotizacion/observaciones/:shop_id/:id_producto', async (req, 
     try {
         const updateCotizacion = {precio, observaciones} 
         await pool.query ('UPDATE carrito_cotizacion set ? WHERE shop_id = ? AND id_producto = ?', [updateCotizacion, shop_id, id_producto])
-        const cotizaciones = await pool.query ('SELECT * FROM carrito_cotizacion WHERE shop_id = ?', [shop_id])
+        const cotizaciones = await pool.query (`SELECT * FROM carrito_cotizacion JOIN productos_proveedor ON productos_proveedor.id = carrito_cotizacion.id_producto 
+                                                JOIN proveedores ON proveedores.id = productos_proveedor.id_proveedor WHERE carrito_cotizacion.shop_id = ? AND 
+                                                carrito_cotizacion.id_producto = ?`, [shop_id, id_producto])
 
         return res.json ({
-            cotizaciones: cotizaciones,
+            cotizacion: cotizaciones[0],
             success: true
         })
     } catch (error) {

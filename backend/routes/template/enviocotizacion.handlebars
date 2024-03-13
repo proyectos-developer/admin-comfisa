@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Welcome Email</title>
+    </head>
+    <body>
+        <div style="width: 800px;">
+            <div class="d-flex justify-content-center" style="width: 213px; background-color: #f9f9f9; padding-left: 193.5px; padding-right: 193.5px; padding-top: 12.5px; padding-bottom: 12.5px; height: 75px;">
+                <img src='https://comfisa.developer-ideas.com/images/logo_web_75.png' style="width: 213px; height: 75px;"/>
+            </div>
+            <div style="width: 800px; padding-top: 50px; padding-bottom: 50px; height: auto;">
+                <div style="align-self: center; width: 800px; hight: 250px;" >
+                    <img src='https://comfisa.developer-ideas.com/images/envio_correo_cotizacion.png' style="width: 250px; height: 250px;"/>
+                </div>
+                <div style="display: flex; flex-wrap: wrap; margin-bottom: 50px;">
+                    <div style="align-self: center; padding: 6.83px 0px;">
+                        {{#each lista_cotizacion}}
+                            <div style="width: 800px; margin-bottom: 10px;">
+                                <div style="width: 800px; flex-wrap: wrap; display: flex; height: 50px; margin-bottom: 10px;">
+                                    <img src={{foto_uno}} style="width: 75px; height: 75px; margin-right: 10px"/>
+                                    <div style="width: 210px; height: 50px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 37.5px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{proveedor}}
+                                        </p>
+                                        <p style="font-size: 14px; font-weight: 500; line-height: 37.5px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{producto}}
+                                        </p>
+                                    </div>
+                                    <div style="width: 50px; height: 50px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px; text-align: center;">
+                                            Cantidad:
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px; text-align: center;">
+                                            {{cantidad}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="width: 800px;">
+                                    <p style="font-size: 14px; font-weight: 600; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                        Informacion adicional:
+                                    </p>
+                                    <p style="font-size: 16px; font-weight: 500; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                        {{comentarios}}
+                                    </p>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex; flex-wrap: wrap; justify-content: space-between!important;background-color:#f9f9f9; height:100px; width:400px; text-align:center; padding-left: 100px; padding-right:100px; padding-top:12.5px; padding-bottom:12.5px;">
+                <img src='https://comfisa.developer-ideas.com/images/logo_web_75.png' style="width: 213px; height: 75px;margin-right:53px;"/>
+                <div style="display: flex; height: 20px; padding-top:27.5px; padding-bottom:27.5px;">
+                    <img src="https://comfisa.developer-ideas.com/images/icono_facebook.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_instagram.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_tiktok.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_twitter.png" style="width: 20px; height: 20px;"/>
+                </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    </body>
+</html>

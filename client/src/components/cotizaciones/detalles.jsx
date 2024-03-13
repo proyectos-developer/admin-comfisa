@@ -14,6 +14,10 @@ export default function DetalleCotizacion({proporcional}) {
         setListaProductos(get_cotizacion.cotizaciones)
     }, [])
 
+    const enviar_correo = () => {
+
+    }
+
     return (
         <div className='position-relative' 
             style={{width: '100%', paddingLeft: 250 / proporcional, paddingRight: 250 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
@@ -34,7 +38,7 @@ export default function DetalleCotizacion({proporcional}) {
                             Proveedor, producto
                         </p>
                     </div>
-                    <div className='d-flex justify-content-start' style={{width: '30%', height: 25 / proporcional, borderRight: '1px solid #f0f0f0',
+                    <div className='d-flex justify-content-start' style={{width: '45%', height: 25 / proporcional, borderRight: '1px solid #f0f0f0',
                         paddingLeft: 10 / proporcional}}>
                         <p style={{fontSize: 16 / proporcional, lineHeight: `${25 / proporcional}px`, color: 'black', marginBottom: 0, fontFamily: 'Poppins, sans-serif',
                                 fontWeight: 700}}>
@@ -48,12 +52,6 @@ export default function DetalleCotizacion({proporcional}) {
                             Cant.
                         </p>
                     </div>
-                    <div className='d-flex justify-content-center' style={{width: '15%', height: 25 / proporcional, paddingLeft: 10 / proporcional}}>
-                        <p style={{fontSize: 16 / proporcional, lineHeight: `${25 / proporcional}px`, color: 'black', marginBottom: 0, fontFamily: 'Poppins, sans-serif',
-                                fontWeight: 700}}>
-                            Precio
-                        </p>
-                    </div>
                 </div>
                 {
                     lista_productos && lista_productos.length > 0 ? (
@@ -64,6 +62,12 @@ export default function DetalleCotizacion({proporcional}) {
                         })
                     ) : null
                 } 
+            </div>
+            <div className='d-flex justify-content-end' style={{width: '100%', height: 50 / proporcional}}>
+                <button className='btn' style={{width: 250 / proporcional, height: 50 / proporcional, background: 'rgb(56, 77, 167)', color: 'white', fontSize: 20 / proporcional,
+                    fontWeight: 600}} onClick={() => enviar_correo()}>
+                    Enviar correo
+                </button>
             </div>
         </div>
     )
