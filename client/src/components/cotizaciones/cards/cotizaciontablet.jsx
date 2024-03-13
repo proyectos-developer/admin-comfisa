@@ -7,7 +7,7 @@ import { constantes } from '../../../uri/constantes'
 import {cotizacionesdata} from '../../../redux/slice/cotizacionesdata'
 import { cotizacionesConstants } from '../../../uri/cotizaciones-constants'
 
-export default function CardCotizacion({cotizacion, index, proporcional}) {
+export default function CardCotizacionTablet({cotizacion, index, proporcional}) {
 
     const dispatch = useDispatch ()
     const navigate = useNavigate()
@@ -47,7 +47,7 @@ export default function CardCotizacion({cotizacion, index, proporcional}) {
 
     return (
         load_data === 2 ? (
-            <div key={index} className='rounded shadow-lg' style={{width: '32%', height: '100%', padding: 10 / proporcional}}>
+            <div key={index} className='rounded shadow-lg' style={{width: '49%', height: '100%', padding: 10 / proporcional}}>
               <div className='d-flex justify-content-end' style={{width: '100%', height: 'auto', marginBottom: 10 / proporcional}}>
                   <p style={{fontSize: 16 / proporcional, lineHeight: `${20 / proporcional}px`, marginBottom: 0, fontWeight: 700, color: 'black'}}>
                     Fecha {pedido.created_at.split('T')[0]}
@@ -86,7 +86,7 @@ export default function CardCotizacion({cotizacion, index, proporcional}) {
                     {cliente.nro_telefono}
                   </p>
               </div>
-              <div style={{width: '100%', height: 30 / proporcional}} className='d-flex justify-content-center'>
+              <div className='d-flex justify-content-center' style={{width: '100%', height: 30 / proporcional}}>
                 <div className='rounded' style={{width: button ? '100%' : '99%', background: 'rgb(56, 77, 167', height: 30 / proporcional,
                     cursor: 'pointer'}}
                     onClick={() => ver_detalles_cotizacion()}
