@@ -38,7 +38,9 @@ export default function ListaCotizacionesTablet({proporcional}) {
         const id = filtro_cotizaciones_search_order_amount.id
         const shop_id = filtro_cotizaciones_search_order_amount.shop_id
         const estado = filtro_cotizaciones_search_order_amount.estado
-        dispatch(cotizacionesdata(cotizacionesConstants(id, shop_id, estado, 0, 16, {}, false).get_cotizaciones_filtro_total))
+        const order_by = filtro_cotizaciones_search_order_amount.order_by
+        const order = filtro_cotizaciones_search_order_amount.order
+        dispatch(cotizacionesdata(cotizacionesConstants(id, shop_id, estado, order_by, order, 0, 16, {}, false).get_cotizaciones_filtro_total))
     }, [])
 
     useEffect(() => {
@@ -59,11 +61,15 @@ export default function ListaCotizacionesTablet({proporcional}) {
     }, [get_cotizaciones_filtro_total])
 
     const seleccionar_ordenar_por = (value) => {
-        const id = filtros.id
-        const shop_id = filtros.shop_id
-        const estado = filtros.estado
-        dispatch (set_filtro_cotizaciones_search_order_amount({pagina: 'cotzaciones', id: id, shop_id: shop_id, estado: estado}))
-        dispatch(cotizacionesdata(cotizacionesConstants(id, shop_id, estado, 0, 16, {}, false).get_cotizaciones_filtro_total))
+        if (value !== '0'){
+            const id = filtros.id
+            const shop_id = filtros.shop_id
+            const estado = filtros.estado
+            const order_by = value.split ('-')[0]
+            const order = value.split ('-')[1]
+            dispatch (set_filtro_cotizaciones_search_order_amount({pagina: 'cotzaciones', id: id, shop_id: shop_id, estado: estado, order_by: order_by, order: order}))
+            dispatch(cotizacionesdata(cotizacionesConstants(id, shop_id, estado, value.split ('-')[0], value.split ('-')[1], 0, 16, {}, false).get_cotizaciones_filtro_total))
+        }
     }
 
     const buscar_cotizacion_por = () => {
@@ -75,7 +81,7 @@ export default function ListaCotizacionesTablet({proporcional}) {
     }
 
     const limpiar_filtros = () => {
-        dispatch(set_filtro_cotizaciones_search_order_amount({pagina: 'cotizaciones', search: 0, estadp: 0}))
+        dispatch(set_filtro_cotizaciones_search_order_amount({pagina: 'cotizaciones', search: 0, estado: 0}))
         dispatch (cotizacionesdata (cotizacionesConstants(0, 0, 0, 0, 16, {}, false).get_cotizaciones_filtro_total))
         dispatch (set_limpiar_filtros({limpiar_filtros: true}))
     }
@@ -85,15 +91,23 @@ export default function ListaCotizacionesTablet({proporcional}) {
         }
     }, [])
 
+
   return (
     <div className='position-relative' style={{width: '100%', paddingLeft: 60 / proporcional, paddingRight: 60 / proporcional}}>
         <div className='d-flex' style={{width: '100%', height: 50 / proporcional, marginBottom: 25 / proporcional }}>
             <div className='d-flex justify-content-between' style={{width: '100%', height: 50 / proporcional}}>
-                <p className='mb-0' 
-                    style={{width: '32%', fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, fontWeight: 400, color: '#212121', 
-                            marginRight: 10 / proporcional, fontFamily: `'Lora', serif`}}>
-                    COTIZACIONES:
-                </p>
+                <div className='' style={{width: '32%', height: 'auto', marginBottom: 10 / proporcional}}>
+                    <p className='mb-0' 
+                        style={{fontSize: 20 / proporcional, lineHeight: `${25 / proporcional}px`, fontWeight: 400, color: '#212121', 
+                                marginRight: 10 / proporcional, fontFamily: `'Lora', serif`}}>
+                        PEDIDO COTIZACIONES:
+                    </p>
+                    <p className='mb-0' 
+                        style={{fontSize: 16 / proporcional, lineHeight: `${25 / proporcional}px`, fontWeight: 400, color: '#212121', 
+                                marginRight: 10 / proporcional, fontFamily: `'Lora', serif`}}>
+                        En espera de respuesta:
+                    </p>
+                </div>
                 <div className='shadow-sm bg-white rounded' 
                     style={{width: '32%', height: 50 / proporcional, border: '1px solid #B2DFDB', borderRadius: 4 / proporcional,
                             marginLeft: 5 / proporcional, marginRight: 5 / proporcional}}>
@@ -151,29 +165,6 @@ export default function ListaCotizacionesTablet({proporcional}) {
                     ) : null
                 }
             </div>
-            {
-                open_menu_derecho ? ( 
-                    <div className='position-absolute shadow rounded' 
-                            style={{width: 330 / proporcional, padding: 30 / proporcional, top: -60 / proporcional, right: 20 / proporcional, background: 'white'}}>
-                        <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
-                            onClick={() => {navigate('/home/cotizaciones/nuevo-proveedor'); dispatch(set_open_menu_derecho(false))}}>
-                            <img src={icono_add} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
-                            <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
-                                Nuevo proveedor
-                            </p>
-                        </div>
-                        <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
-                        <div className='d-flex' style={{width: 270 / proporcional, height: 'auto', marginBottom: 10 / proporcional, cursor: 'pointer'}}
-                            onClick={() => {limpiar_filtros(); dispatch(set_open_menu_derecho(false))}}>
-                            <img src={icono_clean} style={{width: 24 / proporcional, height: 24 / proporcional, marginRight: 10 / proporcional}}/>
-                            <p style={{fontSize: 18 / proporcional, lineHeight: `${24 / proporcional}px`, marginBottom: 0, fontWeight: 500, color: '#212121'}}>
-                                Limpiar filtros
-                            </p>
-                        </div>
-                        <div className='rounded-pill' style={{width: 270 / proporcional, height: 2 / proporcional, background: '#e29022', marginBottom: 10 / proporcional}}/>
-                    </div>
-                ) : null
-            }
       </div>
   )
 }

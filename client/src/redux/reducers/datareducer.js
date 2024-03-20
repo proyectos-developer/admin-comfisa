@@ -2,7 +2,8 @@ import { menutypes } from "../actions/dataactions";
 
 const initialState = {
     open_menu_izquierdo: false,
-    open_menu_derecho: false
+    open_menu_derecho: false,
+    pedidos_cotizacion_usuario: {}
 }
 
 const datareducer = (state = initialState, action) => {
@@ -17,6 +18,12 @@ const datareducer = (state = initialState, action) => {
         return {
             ... state,
             open_menu_derecho
+        }
+    }else if (action.type === menutypes.SET_PEDIDOS_COTIZACION_USUARIO){
+        const pedidos_cotizacion_usuario = action.pedidos_cotizacion_usuario
+        return {
+            ... state,
+            pedidos_cotizacion_usuario
         }
     }
     return state

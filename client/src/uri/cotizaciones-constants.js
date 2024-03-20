@@ -1,6 +1,6 @@
 import { constantes } from "./constantes"
 
-export const cotizacionesConstants= (id = 1, shop_id = '', estado = '', begin = '', amount = '', data = {}, reset = false) => {
+export const cotizacionesConstants= (id = 1, shop_id = '', estado = '', order_by = '', order = '', begin = '', amount = '', data = {}, reset = false) => {
     return {
         url: `${constantes().url_principal[0].url}`,
         update_cotizacion: {
@@ -15,7 +15,7 @@ export const cotizacionesConstants= (id = 1, shop_id = '', estado = '', begin = 
             reset: reset
         },
         get_cotizaciones_filtro_total: {
-            path: `cotizaciones/shop_id/${shop_id}/estado/${estado}/${begin}/${amount}`,
+            path: `cotizaciones/shop_id/${shop_id}/estado/${estado}/order/${order_by}/${order}/${begin}/${amount}`,
             stateType: 'get_cotizaciones_filtro_total',
             reset: reset
         },
@@ -24,5 +24,10 @@ export const cotizacionesConstants= (id = 1, shop_id = '', estado = '', begin = 
             stateType: 'get_cotizacion',
             reset: reset
         },
+        get_cotizacion_usuario: {
+            path: `cotizacion/shop_id/${shop_id}/usuario/${id}`,
+            stateType: 'get_cotizacion_usuario',
+            reset: reset
+        }
     }
 }

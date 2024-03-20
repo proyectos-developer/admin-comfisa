@@ -31,10 +31,8 @@ export default function CardProductoCotizar({proporcional, producto, index}) {
             observaciones: observaciones,
             precio: precio
         }
-        console.log (`${constantes().url_principal[0].url}/cotizacion/observaciones/${producto.shop_id}/${producto.id_producto}`)
         axios.post (`${constantes().url_principal[0].url}/cotizacion/observaciones/${producto.shop_id}/${producto.id_producto}`, data_update)
             .then ((res) => {
-                console.log (res.data.cotizacion)
                 setFotoUno(res.data.cotizacion.foto_uno)
                 setNombreProducto(res.data.cotizacion.producto)
                 setProveedor(res.data.cotizacion.proveedor)

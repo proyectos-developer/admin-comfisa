@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Welcome Email</title>
+    </head>
+    <body>
+        <div style="width: 100%;">
+            <div style="width: 100%; background-color: #f9f9f9; justify-content: center !important; flex-wrap: wrap; display: flex !important; padding-top: 12.5px; padding-bottom: 12.5px; height: 75px;">
+                <img src='https://comfisa.developer-ideas.com/images/logo_web_75.png' style="width:14.2%; height:75px; margin-right:35.8%; margin-left:35.8%;"/>
+            </div>
+            <div style="width: 100%; padding-top: 50px; padding-bottom: 50px; height: auto;">
+                <div style="width: 100%; height: 30px; margin-bottom: 20px;">
+                    <a href="https://comfisa.developer-ideas.com/respuesta/cotizacion/{{shop_id}}" target="_blanck"
+                        style="font-size: 20px; line-height: 30px; text-decoration: underline; text-align: center;">Ingrese aquí para para mas detalles (o si no logra ver correctamente el correo)</a>
+                </div>
+                <div style="display: flex !important; flex-wrap: wrap; margin-bottom: 50px; width: 100%;">
+                    <div style="align-self: center; width: 20%;">
+                        <img src='https://comfisa.developer-ideas.com/images/correo_pedido_cotizar.png' style="margin-right: 20px; width: 250px; height: 250px;"/>
+                    </div>
+                    <div style="align-self: center; width: 80%;">
+                        {{#each lista_cotizacion}}
+                            <div style="width: 100%; margin-bottom: 10px; border: 1px solid #efefef; border-radius: 8px; padding: 12.5px; height: auto;">
+                                <div style="width: 100%; flex-wrap: wrap; display: flex; height: 75px; margin-bottom: 10px; border-bottom: 1px solid #efefef">
+                                    <div style="width: 10%;">
+                                        <img src={{foto_uno}} style="width: 75px; height: 75px;"/>
+                                    </div>
+                                    <div style="width: 20%; height: 75px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 37.5px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{proveedor}}
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 18.75px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{producto}}
+                                        </p>
+                                    </div>
+                                    <div style="width: 10%; height: 75px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 37.5px; color: #212121; margin-bottom: 0px; margin-top: 0px; text-align: center;">
+                                            Cantidad:
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 37.5px; color: #212121; margin-bottom: 0px; margin-top: 0px; text-align: center;">
+                                            {{cantidad}}
+                                        </p>
+                                    </div>
+                                    <div style="width: 60%; height: 75px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            Detalles:
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{comentarios}}
+                                        </p>
+                                    </div>
+                                </div>
+                                <div style="width: 100%; flex-wrap: wrap; display: flex; height: 75px; margin-bottom: 10px;">
+                                    <div style="width: 10%;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            Precio:
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            S/. {{precio}}
+                                        </p>
+                                    </div>
+                                    <div style="width: 90%; height: 75px;">
+                                        <p style="font-size: 14px; font-weight: 600; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            Observaciones:
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 25px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{Observaciones}}
+                                        </p>
+                                        <p style="font-size: 16px; font-weight: 500; line-height: 18.75px; color: #212121; margin-bottom: 0px; margin-top: 0px;">
+                                            {{producto}}
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            </div>
+            <div style="display:flex!important;justify-content:center!important;background-color:#f9f9f9; height:100px; width:100%;padding-top:12.5px;padding-bottom:12.5px;">
+                <img src='https://comfisa.developer-ideas.com/images/logo_web_75.png' style="width: 213px; height: 75px;margin-right:53px;"/>
+                <div style="display: flex; height: 20px; padding-top:27.5px; padding-bottom:27.5px;">
+                    <img src="https://comfisa.developer-ideas.com/images/icono_facebook.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_instagram.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_tiktok.png" style="width: 20px; height: 20px; margin-right: 10px;"/>
+                    <img src="https://comfisa.developer-ideas.com/images/icono_twitter.png" style="width: 20px; height: 20px;"/>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

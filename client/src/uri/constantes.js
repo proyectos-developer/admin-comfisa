@@ -1,7 +1,7 @@
 export const constantes = () => {
     return {
         url_principal: [
-            {url: 'http://localhost:3002/api'}
+            {url: 'http://admin-comfisa.developer-ideas.com/api'}
         ],
     }
 }

@@ -19,7 +19,7 @@ export default function CardCotizacion({cotizacion, index, proporcional}) {
     
     const [load_data, setLoadData] = useState (0)
 
-    const {get_cotizacion} = useSelector (({cotizaciones}) => cotizaciones)
+    const {get_cotizacion_usuario} = useSelector (({cotizaciones}) => cotizaciones)
 
     useEffect(() => {
         setLoadData(1)
@@ -36,19 +36,22 @@ export default function CardCotizacion({cotizacion, index, proporcional}) {
     }, [])
 
     useEffect(() => {
-      if (get_cotizacion && get_cotizacion.success === true && get_cotizacion.cotizaciones){
+      if (get_cotizacion_usuario && get_cotizacion_usuario.success === true && get_cotizacion_usuario.cotizaciones && get_cotizacion_usuario.usuario){
         navigate (`/home/cotizaciones/detalles/${pedido.shop_id}`)
       }
-    }, [get_cotizacion])
+    }, [get_cotizacion_usuario])
 
     const ver_detalles_cotizacion = () => {
-      dispatch (cotizacionesdata(cotizacionesConstants(0, cotizacion.shop_id, 0, 0, 16, {}, false).get_cotizacion))
+      dispatch (cotizacionesdata(cotizacionesConstants(cotizacion.usuario, cotizacion.shop_id, 0, 0, 16, {}, false).get_cotizacion_usuario))
     }
 
     return (
         load_data === 2 ? (
             <div key={index} className='rounded shadow-lg' style={{width: '32%', height: '100%', padding: 10 / proporcional}}>
-              <div className='d-flex justify-content-end' style={{width: '100%', height: 'auto', marginBottom: 10 / proporcional}}>
+              <div className='d-flex justify-content-between' style={{width: '100%', height: 'auto', marginBottom: 10 / proporcional}}>
+                  <p style={{fontSize: 16 / proporcional, lineHeight: `${20 / proporcional}px`, marginBottom: 0, fontWeight: 700, color: 'black'}}>
+                    Nro pedido {pedido.nro_pedido}
+                  </p>
                   <p style={{fontSize: 16 / proporcional, lineHeight: `${20 / proporcional}px`, marginBottom: 0, fontWeight: 700, color: 'black'}}>
                     Fecha {pedido.created_at.split('T')[0]}
                   </p>

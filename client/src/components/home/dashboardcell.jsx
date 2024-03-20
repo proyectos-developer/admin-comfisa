@@ -15,71 +15,89 @@ export default function HomeDashboardCell({proporcional}) {
   const [opcion_menu, setOpcionMenu] = useState ('')
 
   return (
-    <div className='' style={{width: 499 / proporcional, paddingLeft: 50 / proporcional, paddingRight: 50 / proporcional, paddingTop: 50 / proporcional,
-      paddingBottom: 50 / proporcional}}>
-        <div style={{width: 250 / proporcional, height: 300 / proporcional, marginRight: 74.5 / proporcional, marginLeft: 74.5 / proporcional, marginBottom: 25 / proporcional}}>
-          <div className='shadow-lg rounded-circle position-relative' 
-              onMouseOver={() => setOpcionMenu('proveedores')} onMouseLeave={() => setOpcionMenu('')}
-              onClick={() => navigate ('proveedores')}
-              style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
-              <img src={icono_proveedores} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
-              {
-                  opcion_menu === 'proveedores' ? (
-                      <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
-                          className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
-                      </div>
-                  ) : null
-              }
-          </div>
-          <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PROVEEDORES</p>
-        </div>
-        <div style={{width: 250 / proporcional, height: 300 / proporcional, marginLeft: 74.5 / proporcional, marginLeft: 74.5 / proporcional, marginBottom: 25 / proporcional}}>
-          <div className='shadow-lg rounded-circle position-relative' 
-              onMouseOver={() => setOpcionMenu('productos')} onMouseLeave={() => setOpcionMenu('')}
-              onClick={() => navigate ('productos')}
-              style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
-              <img src={icono_productos} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
-              {
-                  opcion_menu === 'productos' ? (
-                      <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
-                          className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
-                      </div>
-                  ) : null
-              }
-          </div>
-          <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PRODUCTOS</p>
-        </div>
-        <div style={{width: 250 / proporcional, height: 300 / proporcional, marginRight: 74.5 / proporcional, marginLeft: 74.5 / proporcional, marginBottom: 25 / proporcional}}>
-          <div className='shadow-lg rounded-circle position-relative' 
-            onMouseOver={() => setOpcionMenu('pedidos')} onMouseLeave={() => setOpcionMenu('')}
-            onClick={() => navigate ('pedidos')}
-            style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
-            <img src={icono_cotizar} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
-            {
-                opcion_menu === 'pedidos' ? (
-                    <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
-                        className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
-                    </div>
-                ) : null
-            }
-          </div>
-          <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PEDIDOS</p>
-        </div>
-        <div style={{width: 250 / proporcional, height: 300 / proporcional, marginLeft: 74.5 / proporcional, marginLeft: 74.5 / proporcional, marginBottom: 25 / proporcional}}>
-          <div className='shadow-lg rounded-circle position-relative' 
-              onMouseOver={() => setOpcionMenu('cotizaciones')} onMouseLeave={() => setOpcionMenu('')}
-              onClick={() => navigate ('cotizaciones')}
-              style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
-              <img src={icono_pedidos} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
-              {
-                  opcion_menu === 'cotizaciones' ? (
-                      <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
-                          className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
-                      </div>
-                  ) : null
-              }
+    <div className='position-relative' 
+      style={{width: '100%', paddingLeft: 20 / proporcional, paddingRight: 20 / proporcional, paddingTop: 50 / proporcional, paddingBottom: 50 / proporcional}}>
+        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto', marginBottom: 50 / proporcional}}>
+          <div style={{width: '99%', height: 'auto'}}>
+            <div className='d-flex justify-content-center' style={{width:'100%', height: 'auto'}}>
+              <div className='shadow-lg rounded-circle position-relative' 
+                  onMouseOver={() => setOpcionMenu('proveedores')} onMouseLeave={() => setOpcionMenu('')}
+                  onClick={() => navigate ('proveedores')}
+                  style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
+                  <img src={icono_proveedores} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
+                  {
+                      opcion_menu === 'proveedores' ? (
+                          <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
+                              className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
+                          </div>
+                      ) : null
+                  }
+              </div>
             </div>
-            <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>COTIZACIONES</p>
+            <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PROVEEDORES</p>
+          </div>
+        </div>
+        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto', marginBottom: 50 / proporcional}}>
+          <div style={{width: '49%', height: 'auto'}}>
+            <div className='d-flex justify-content-center' style={{width:'100%', height: 'auto'}}>
+              <div className='shadow-lg rounded-circle position-relative' 
+                  onMouseOver={() => setOpcionMenu('productos')} onMouseLeave={() => setOpcionMenu('')}
+                  onClick={() => navigate ('productos')}
+                  style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
+                  <img src={icono_productos} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
+                  {
+                      opcion_menu === 'productos' ? (
+                          <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
+                              className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
+                          </div>
+                      ) : null
+                  }
+              </div>
+            </div>
+              <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PRODUCTOS</p>
+          </div>
+        </div>
+        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto', marginBottom: 50 / proporcional}}>
+          <div style={{width: '99%', height: 'auto'}}>
+            <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto'}}>
+              <div className='d-flex justify-content-center' style={{width:'100%', height: 'auto'}}>
+                <div className='shadow-lg rounded-circle position-relative' 
+                    onMouseOver={() => setOpcionMenu('cotizaciones')} onMouseLeave={() => setOpcionMenu('')}
+                    onClick={() => navigate ('cotizaciones')}
+                    style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
+                    <img src={icono_cotizar} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
+                    {
+                        opcion_menu === 'cotizaciones' ? (
+                            <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
+                                className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
+                            </div>
+                        ) : null
+                    }
+                </div>
+              </div>
+            </div>
+              <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>COTIZACIONES</p>
+          </div>
+        </div>
+        <div className='d-flex justify-content-center' style={{width: '100%', height: 'auto'}}>
+          <div style={{width: '99%', height: 'auto'}}>
+            <div className='d-flex justify-content-center' style={{width:'100%', height: 'auto'}}>
+              <div className='shadow-lg rounded-circle position-relative' 
+                onMouseOver={() => setOpcionMenu('pedidos')} onMouseLeave={() => setOpcionMenu('')}
+                onClick={() => navigate ('pedidos')}
+                style={{cursor: 'pointer', width: 250 / proporcional, height: 250 / proporcional, padding: 50 / proporcional, border: '2px solid rgb(33,33,33, 0.6)'}}>
+                <img src={icono_pedidos} style={{width: 150 / proporcional, height: 150 / proporcional}}/>
+                {
+                    opcion_menu === 'pedidos' ? (
+                        <div style={{cursor: 'pointer', width: 248 / proporcional, height: 248 / proporcional, background: 'rgb(33,33,33, 0.6)'}} 
+                            className='position-absolute top-0 start-0 rounded-circle shadow-sm'>
+                        </div>
+                    ) : null
+                }
+              </div>
+            </div>
+            <p style={{fontSize: 24 / proporcional, lineHeight: `${50 / proporcional}px`, color: '#212121', fontWeight: 500, textAlign: 'center', cursor: 'default'}}>PEDIDOS</p>
+          </div>
         </div>
     </div>
   )

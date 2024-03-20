@@ -22,6 +22,7 @@ export const cotizacionesdata = createAsyncThunk ('', async (params) => {
         case 'get_cotizaciones':
         case 'get_cotizaciones_filtro_total':
         case 'get_cotizacion':
+        case 'get_cotizacion_usuario':
             if (params.reset){ 
                 return {success: false}
             }else{

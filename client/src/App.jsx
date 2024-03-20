@@ -59,6 +59,18 @@ import DetallesCotizacion from './components/cotizaciones/detalles.jsx'
 import DetallesCotizacionTablet from './components/cotizaciones/detallestablet.jsx'
 import DetallesCotizacionCell from './components/cotizaciones/detallescell.jsx'
 
+import PedidosPanel from './components/pedidos/panel.jsx'
+import PedidosPanelTablet from './components/pedidos/paneltablet.jsx'
+import PedidosPanelCell from './components/pedidos/panelcell.jsx'
+
+import ListaPedidos from './components/pedidos/pedidos.jsx'
+import ListaPedidosTablet from './components/pedidos/pedidostablet.jsx'
+import ListaPedidosCell from './components/pedidos/pedidoscell.jsx'
+
+import DetallesPedido from './components/pedidos/detalles.jsx'
+import DetallesPedidoTablet from './components/pedidos/detallestablet.jsx'
+import DetallesPedidoCell from './components/pedidos/detallescell.jsx'
+
 function App() {
   const [width, setWidth] = useState (window.outerWidth)
 
@@ -126,13 +138,27 @@ function App() {
                                                       width < 991 ? <CotizacionesPanelTablet proporcional={991 / width}/> : 
                                                                     <CotizacionesPanel proporcional={1920 / width} />}>
 
-                        <Route index element={width < 500 ? <ListaCotizacionesCell proporcional={499 / width}/> : 
-                                              width < 991 ? <ListaCotizacionesTablet proporcional={991 / width}/> : 
-                                                            <ListaCotizaciones proporcional={1920 / width} />}/>
-                                                            
-                        <Route path='detalles/:id_cotizacion' element={width < 500 ? <DetallesCotizacionCell proporcional={499 / width}/> : 
-                                                                       width < 991 ? <DetallesCotizacionTablet proporcional={991 / width}/> : 
-                                                                                     <DetallesCotizacion proporcional={1920 / width} />}/>
+                    <Route index element={width < 500 ? <ListaCotizacionesCell proporcional={499 / width}/> : 
+                                          width < 991 ? <ListaCotizacionesTablet proporcional={991 / width}/> : 
+                                                        <ListaCotizaciones proporcional={1920 / width} />}/>
+                                                              
+                    <Route path='detalles/:id_cotizacion' element={width < 500 ? <DetallesCotizacionCell proporcional={499 / width}/> : 
+                                                                   width < 991 ? <DetallesCotizacionTablet proporcional={991 / width}/> : 
+                                                                                 <DetallesCotizacion proporcional={1920 / width} />}/>
+                                                                      
+                  </Route>
+                  
+                  <Route path='pedidos' element={width < 500 ? <PedidosPanelCell proporcional={499 / width}/> : 
+                                                 width < 991 ? <PedidosPanelTablet proporcional={991 / width}/> : 
+                                                               <PedidosPanel proporcional={1920 / width} />}>
+
+                    <Route index element={width < 500 ? <ListaPedidosCell proporcional={499 / width}/> : 
+                                          width < 991 ? <ListaPedidosTablet proporcional={991 / width}/> : 
+                                                        <ListaPedidos proporcional={1920 / width} />}/>
+                                                              
+                    <Route path='detalles/:id_cotizacion' element={width < 500 ? <DetallesPedidoCell proporcional={499 / width}/> : 
+                                                                   width < 991 ? <DetallesPedidoTablet proporcional={991 / width}/> : 
+                                                                                 <DetallesPedido proporcional={1920 / width} />}/>
                                                                       
                   </Route>
             </Route>

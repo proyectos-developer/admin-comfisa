@@ -2,7 +2,7 @@ const cors = require('cors')
 
 const express = require ('express');
 const morgan = require('morgan');
-const exphbs = require('express-handlebars');
+const {create} = require('express-handlebars');
 const path = require('path');
 const flash = require ('connect-flash')
 const session = require ('express-session')
@@ -16,16 +16,14 @@ app.use(cors())
 require ('./backend/lib/passport.js')
 
 /**Configuraciones */
-app.set ('port', process.env.PORT || 3002);
-app.set('views', path.join(__dirname, 'views')); 
-app.engine('.hbs', exphbs.engine({
-    defaultLayout: 'main',
-    layoutsDir: path.join(app.get('views'), 'layouts'),
-    partialsDir: path.join(app.get('views'), 'partials'),
-    extname: '.hbs', 
-    helpers: require('./backend/lib/handlebars.js')
-}));
-app.set('view engine', '.hbs');
+const hbs = create ({
+  extname: '.hbs'
+})
+
+app.set ('port', process.env.PORT || 3001);
+app.engine(".hbs", hbs.engine);
+app.set("view engine", ".hbs");
+app.set("views", path.join(__dirname, 'views'));
 
 //Middlewares
 app.use(
@@ -61,6 +59,7 @@ app.use(require('./backend/routes/correo.js'))
 app.use(require('./backend/routes/proveedores.js'))
 app.use(require('./backend/routes/productos.js'))
 app.use(require('./backend/routes/cotizaciones.js'))
+app.use(require('./backend/routes/pedidos.js'))
 
 app.use(express.static(path.resolve(__dirname, './backend/views')));
 app.get ('/api', (req, res) => {
@@ -105,6 +104,14 @@ app.get('/home/cotizaciones', (req, res) => {
 });
 
 app.get('/home/cotizaciones/detalles/:id_cotizacion', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
+});
+
+app.get('/home/pedidos', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
+});
+
+app.get('/home/pedidos/detalles/:id_cotizacion', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
 });
 

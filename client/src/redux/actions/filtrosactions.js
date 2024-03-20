@@ -1,7 +1,8 @@
 export const filtrostypes = {
     SET_FILTRO_PROVEEDORES_SEARCH_ORDER_AMOUNT:                 'SET_FILTRO_PROVEEDORES_SEARCH_ORDER_AMOUNT',
     SET_FILTRO_PRODUCTOS_SEARCH_ORDER_AMOUNT:                   'SET_FILTRO_PRODUCTOS_SEARCH_ORDER_AMOUNT',
-    SET_FILTRO_COTIZACIONES_SEARCH_ORDER_AMOUNT:                 'SET_FILTRO_COTIZACIONES_SEARCH_ORDER_AMOUNT',
+    SET_FILTRO_COTIZACIONES_SEARCH_ORDER_AMOUNT:                'SET_FILTRO_COTIZACIONES_SEARCH_ORDER_AMOUNT',
+    SET_FILTRO_PEDIDOS_SEARCH_ORDER_AMOUNT:                     'SET_FILTRO_PEDIDOS_SEARCH_ORDER_AMOUNT',
     SET_LIMPIAR_FILTROS:                                        'SET_LIMPIAR_FILTROS',
 }
 
@@ -23,6 +24,13 @@ export const set_filtro_cotizaciones_search_order_amount = filtro_cotizaciones_s
     return {
         filtro_cotizaciones_search_order_amount,
         type: filtrostypes.SET_FILTRO_COTIZACIONES_SEARCH_ORDER_AMOUNT
+    }
+}
+
+export const set_filtro_pedidos_search_order_amount = filtro_pedidos_search_order_amount => {
+    return {
+        filtro_pedidos_search_order_amount,
+        type: filtrostypes.SET_FILTRO_PEDIDOS_SEARCH_ORDER_AMOUNT
     }
 }
 
