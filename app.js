@@ -110,7 +110,7 @@ app.get('/home/cotizaciones/detalles/:id_cotizacion', (req, res) => {
 app.get('/home/pedidos', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
 });
-
+gita 
 app.get('/home/pedidos/detalles/:id_cotizacion', (req, res) => {
   res.sendFile(path.resolve(__dirname, './client/build/home/productos/detalles-producto/:id_producto', 'index'));
 });
