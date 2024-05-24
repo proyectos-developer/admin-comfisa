@@ -170,7 +170,7 @@ CREATE TABLE medida_tipo_producto(
     proveedor VARCHAR (100) NOT NULL,
     id_tipo INT(11) NOT NULL,
     nombre_tipo VARCHAR (100) NOT NULL,
-    medida VARCHAR (100) NOT NULL,
+    nombre_medida VARCHAR (100) NOT NULL,
     created_at timestamp NOT NULL DEFAULT current_timestamp 
 );
 
