@@ -2,7 +2,7 @@ module.exports = {
     database: {
         host: 'developer-ideas.com',
         user: 'admin_comfisa', 
-        password: '6hp21iV2#', 
+        password: '26%C1nx5s', 
         database: 'admin_comfisa' 
     }
 }
