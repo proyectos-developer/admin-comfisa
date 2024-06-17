@@ -10,11 +10,11 @@ const nodemailer = require('nodemailer')
 const SMTPTransport = require('nodemailer/lib/smtp-transport')
 
 var transporter = nodemailer.createTransport( new SMTPTransport ({
-    service: "hotmail", // hostname
+    host: "developer-ideas.com", // service
     secure: false, // use SSL
     port: 587, // port for secure SMTP
     auth: {
-        user: 'jp.portocarrero.jp@hotmail.com',
+        user: 'admin@developer-ideas.com',
         pass: 'J4027@4060r'
     },
     tls: {
@@ -48,7 +48,7 @@ router.post('/api/correo/enviar/cotizacion/:shop_id', async (req, res) => {
     
         if (usuarios.length === 1){
             var mailOptions = {
-                from: '"Grupo COMFISA" <jp.portocarrero.jp@hotmail.com>', // sender address
+                from: '"Grupo COMFISA" <admin@developer-ideas.com>', // sender address
                 to: usuarios[0].correo, // list of receivers
                 subject: 'Respuesta de su cotización a su pedido',
                 template: 'enviocotizacion', // the name of the template file i.e email.handlebars
@@ -136,7 +136,7 @@ router.post('/api/correo/mensaje/web', async (req, res) => {
     const { correo, nombres, apellidos, telefono, mensaje } = req.body
 
     var mailOptions = {
-        from: '"Grupo COMFISA" <jp.portocarrero.jp@hotmail.com>', // sender address
+        from: '"Grupo COMFISA" <admin@developer-ideas.com>', // sender address
         to: correo + ', ventas@grupocomfisa.com, gerencia@grupocomfisa.com', // list of receivers
         subject: 'Mensaje de la web Grupo COMFISA',
         template: 'mensajeweb', // the name of the template file i.e email.handlebars
