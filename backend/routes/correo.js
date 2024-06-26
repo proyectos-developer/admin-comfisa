@@ -8,17 +8,18 @@ const pool = require('../database')
 
 const nodemailer = require('nodemailer')
 const SMTPTransport = require('nodemailer/lib/smtp-transport')
+const keys = require('../keys')
 
 var transporter = nodemailer.createTransport( new SMTPTransport ({
-    host: "developer-ideas.com", // service
+    host: "in-v3.mailjet.com", // service
     secure: false, // use SSL
     port: 587, // port for secure SMTP
     auth: {
-        user: 'admin@developer-ideas.com',
-        pass: 'J4027@4060r'
+        user: keys.mailjet.user,
+        pass: keys.mailjet.pass
     },
     tls: {
-        rejectUnauthorized: false
+      rejectUnauthorized: false // Disable certificate validation
     }
 }))
 
